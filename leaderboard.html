@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="icon" type="image/png" href="kuliah2.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #abcdf9;
+            padding: 10px;
+            position: fixed; /* Make navbar fixed */
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar img {
+            height: 40px;
+            margin-right: 15px;
+            margin-left: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        .navbar a:hover {
+            background: #575757;
+        }
+        .container {
+            width: 60%;
+            margin: 100px auto; /* Add margin to account for fixed navbar */
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background: #007BFF;
+            color: white;
+        }
+        button {
+            display: inline-block; /* Change to inline-block for centering */
+            margin: 20px auto; /* Center the button */
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="kuliah2.png" alt="Logo" class="logo" width="40">
+        <div>
+            <a href="Explorgramming.html">Home</a>
+            <a href="Leaderboard.html">Leaderboard</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Leaderboard</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Team</th>
+                    <th>Total Correct Answers</th>
+                    <th>Total Wrong Answers</th>
+                    <th>Total Time Taken</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboardBody"></tbody>
+        </table>
+        <button onclick="location.href='Explorgramming.html'">Back</button>
+    </div>
+
+    <script>
+        function loadLeaderboard() {
+            const groups = 8; // Number of groups
+            const checkpoints = 8; // Number of checkpoints
+            const leaderboardBody = document.getElementById("leaderboardBody");
+            leaderboardBody.innerHTML = "";
+
+            // Fetch checkpoint data from localStorage
+            const checkpointData = JSON.parse(localStorage.getItem("checkpointData")) || {};
+
+            const scores = [];
+            for (let g = 1; g <= groups; g++) {
+                let totalCorrect = 0;
+                let totalWrong = 0;
+                let totalTime = 0;
+
+                for (let cp = 1; cp <= checkpoints; cp++) {
+                    if (checkpointData[cp] && checkpointData[cp][g]) {
+                        const time = checkpointData[cp][g].time;
+                        if (time) {
+                            const [minutes, seconds] = time.split(":").map(Number);
+                            totalTime += minutes * 60 + seconds; // Convert mm:ss to total seconds
+                        }
+                        totalCorrect += checkpointData[cp][g].correct || 0;
+                        totalWrong += checkpointData[cp][g].wrong || 0;
+                    }
+                }
+
+                scores.push({
+                    team: `Team ${g}`,
+                    correct: totalCorrect,
+                    wrong: totalWrong,
+                    time: totalTime,
+                });
+            }
+
+            // Sort scores by total correct answers (descending), then by total time taken (ascending)
+            scores.sort((a, b) => {
+                if (b.correct === a.correct) {
+                    return a.time - b.time; // Less time taken is better
+                }
+                return b.correct - a.correct; // Higher score is better
+            });
+
+            // Populate leaderboard table
+            scores.forEach((entry, index) => {
+                const formattedTime = `${Math.floor(entry.time / 60)}:${String(entry.time % 60).padStart(2, "0")}`; // Convert seconds back to mm:ss
+                const row = `<tr>
+                    <td>${index + 1}</td>
+                    <td>${entry.team}</td>
+                    <td>${entry.correct}</td>
+                    <td>${entry.wrong}</td>
+                    <td>${formattedTime}</td>
+                </tr>`;
+                leaderboardBody.innerHTML += row;
+            });
+        }
+
+        window.onload = loadLeaderboard;
+    </script>
+</body>
+</html>

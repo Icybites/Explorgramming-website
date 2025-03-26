@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Entry Form</title>
+    <link rel="icon" type="image/png" href="kuliah2.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #abcdf9;
+            padding: 10px;
+            position: fixed; /* Make navbar fixed */
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar img {
+            height: 40px;
+            margin-right: 15px;
+            margin-left: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        .navbar a:hover {
+            background: #575757;
+        }
+        .container {
+            width: 80%;
+            margin: 100px auto; /* Add margin to account for fixed navbar */
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        input[type="text"], input[type="number"] {
+            width: 90%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .summary-table {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="kuliah2.png" alt="Logo" class="logo" width="40">
+        <div>
+            <a href="Explorgramming.html">Home</a>
+            <a href="faciAccess.html">Checkpoints</a>
+            <a href="Leaderboard.html">Leaderboard</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Mark Entry Form</h2>
+        <div id="checkpoints"></div>
+        <h2 class="summary-table">Automatic Calculation</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Group</th>
+                    <th>Total Time Taken</th>
+                    <th>Total Correct Answers</th>
+                    <th>Total Wrong Answers</th>
+                </tr>
+            </thead>
+            <tbody id="summaryTable"></tbody>
+        </table>
+        <button onclick="location.href='Leaderboard.html'" style="margin-top: 20px;">Go to Leaderboard</button>
+    </div>
+    <script>
+        const groups = 8;
+        const checkpoints = 8;
+        let checkpointData = JSON.parse(localStorage.getItem("checkpointData")) || {};
+
+        function createSections() {
+            const container = document.getElementById('checkpoints');
+            for (let cp = 1; cp <= checkpoints; cp++) {
+                const section = document.createElement('div');
+                section.className = 'section';
+                section.innerHTML = `<h3>Checkpoint ${cp}</h3>`;
+                let tableHTML = `<table>
+                    <thead>
+                        <tr>
+                            <th>Group</th>
+                            <th>Time Taken (mm:ss)</th>
+                            <th>Correct Answers</th>
+                            <th>Wrong Answers</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+                for (let g = 1; g <= groups; g++) {
+                    const groupData = checkpointData[cp]?.[g] || { time: "", correct: 0, wrong: 0 };
+                    tableHTML += `<tr>
+                        <td>${g}</td>
+                        <td><input type='text' id='time-${cp}-${g}' placeholder='mm:ss' value='${groupData.time}'></td>
+                        <td><input type='number' id='correct-${cp}-${g}' value='${groupData.correct}'></td>
+                        <td><input type='number' id='wrong-${cp}-${g}' value='${groupData.wrong}'></td>
+                    </tr>`;
+                }
+                tableHTML += `</tbody></table>
+                    <button onclick='saveData(${cp})'>Save Checkpoint ${cp} Data</button>`;
+                section.innerHTML += tableHTML;
+                container.appendChild(section);
+            }
+        }
+
+        function saveData(cp) {
+            if (!checkpointData[cp]) checkpointData[cp] = {};
+            for (let g = 1; g <= groups; g++) {
+                const time = document.getElementById(`time-${cp}-${g}`).value;
+                const correct = parseInt(document.getElementById(`correct-${cp}-${g}`).value) || 0;
+                const wrong = parseInt(document.getElementById(`wrong-${cp}-${g}`).value) || 0;
+                checkpointData[cp][g] = { time, correct, wrong };
+            }
+            localStorage.setItem("checkpointData", JSON.stringify(checkpointData)); // Save to localStorage
+            calculateSummary();
+        }
+
+        function calculateSummary() {
+            const summaryTable = document.getElementById("summaryTable");
+            summaryTable.innerHTML = "";
+            for (let g = 1; g <= groups; g++) {
+                let totalTime = 0, totalCorrect = 0, totalWrong = 0;
+                for (let cp = 1; cp <= checkpoints; cp++) {
+                    if (checkpointData[cp]?.[g]) {
+                        const time = checkpointData[cp][g].time;
+                        if (time) {
+                            const [minutes, seconds] = time.split(":").map(Number);
+                            totalTime += minutes * 60 + seconds; // Convert mm:ss to total seconds
+                        }
+                        totalCorrect += checkpointData[cp][g].correct;
+                        totalWrong += checkpointData[cp][g].wrong;
+                    }
+                }
+                const formattedTime = `${Math.floor(totalTime / 60)}:${String(totalTime % 60).padStart(2, "0")}`; // Convert seconds back to mm:ss
+                summaryTable.innerHTML += `<tr>
+                    <td>${g}</td>
+                    <td>${formattedTime}</td>
+                    <td>${totalCorrect}</td>
+                    <td>${totalWrong}</td>
+                </tr>`;
+            }
+        }
+
+        createSections();
+        calculateSummary(); // Recalculate summary on page load
+    </script>
+</body>
+</html>

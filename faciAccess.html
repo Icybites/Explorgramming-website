@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorgramming Checkpoints</title>
+    <link rel="icon" type="image/png" href="kuliah2.png">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background-color: #f4f4f4; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #abcdf9;
+            padding: 10px;
+            position: fixed; /* Make navbar fixed */
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar img {
+            height: 40px;
+            margin-right: 15px;
+            margin-left: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        .navbar a:hover {
+            background: #575757;
+        }
+        .container { 
+            width: 60%; 
+            margin: 100px auto; 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+        h1 { 
+            color: #333; 
+        }
+        ul { 
+            list-style-type: none; 
+            padding: 0; 
+            text-align: center;
+        }
+        li { 
+            margin: 10px 0; 
+        }
+        a.link-button, button.link-button { 
+            display: block; 
+            text-decoration: none; 
+            color: white; 
+            background: #007BFF; 
+            padding: 10px; 
+            border-radius: 5px; 
+            transition: 0.3s;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            width: 100%; 
+            max-width: 600px; 
+            margin: 0 auto;
+        }
+        a.link-button:hover, button.link-button:hover { 
+            background: #0056b3; 
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #007BFF;
+            width: 50%;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .modal-content button {
+            display: block;
+            text-decoration: none;
+            color: white;
+            background: #007BFF;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px auto;
+            width: 100%; /* Make modal buttons fill the container */
+            max-width: 600px; /* Set a maximum width for large screens */
+            text-align: center;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .modal-content button:hover {
+            background: #0056b3;
+        }
+        .code-container {
+            margin-top: 20px;
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .copy-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .copy-button:hover {
+            background-color: #218838;
+        }
+    </style>
+    <script>
+        function openCheckpointModal(checkpoint) {
+            document.getElementById(`checkpointModal${checkpoint}`).style.display = "block";
+        }
+
+        function closeCheckpointModal(checkpoint) {
+            document.getElementById(`checkpointModal${checkpoint}`).style.display = "none";
+        }
+
+        function showCode(option) {
+            const codeContainer = document.getElementById("codeContainer");
+            const copyButton = document.getElementById("copyButton");
+            if (option === "mingw") {
+                codeContainer.textContent = `#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello, MinGW Compiler!" << endl;
+    return 0;
+}`;
+            } else if (option === "msvc") {
+                codeContainer.textContent = `#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello, MSVC Compiler!" << endl;
+    return 0;
+}`;
+            }
+            copyButton.style.display = "inline-block";
+        }
+
+        function copyCode() {
+            const codeContainer = document.getElementById("codeContainer");
+            navigator.clipboard.writeText(codeContainer.textContent).then(() => {
+                alert("Code copied to clipboard!");
+            });
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="kuliah2.png" alt="Logo" class="logo" width="40">
+        <div>
+            <a href="Explorgramming.html">Home</a>
+            <a href="faciAccess.html">Checkpoints</a>
+            <a href="Leaderboard.html">Leaderboard</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Explorgramming Challenge</h1>
+        <h2>Checkpoints</h2>
+        <ul>
+            <li><button class="link-button" onclick="location.href='keyin.html'">Leaderboard Marking</button></li>
+            <li><button class="link-button" onclick="openCheckpointModal(1)">Checkpoint 1</button></li>
+            <li><button class="link-button" onclick="openCheckpointModal(2)">Checkpoint 2</button></li>
+            <li><button class="link-button" onclick="openCheckpointModal(3)">Checkpoint 3</button></li>
+            <li><button class="link-button" onclick="openCheckpointModal(4)">Checkpoint 4</button></li>
+            <li><button class="link-button" onclick="openCheckpointModal(5)">Checkpoint 5</button></li>
+            <li><button class="link-button" onclick="openCheckpointModal(6)">Checkpoint 6</button></li>
+            <li><button class="link-button" onclick="openCheckpointModal(7)">Checkpoint 7</button></li>
+            <li><button class="link-button" onclick="openCheckpointModal(8)">Checkpoint 8</button></li>
+        </ul>
+    </div>
+
+    <!-- Modals for Checkpoints -->
+    <div id="checkpointModal1" class="modal">
+        <div class="modal-content">
+            <h3>Select Code Option for Checkpoint 1</h3>
+            <button onclick="location.href='checkpoint1_mingw.html'">Code (MinGW Compiler)</button>
+            <button onclick="location.href='checkpoint1_msvc.html'">Code (MSVC)</button>
+            <button onclick="closeCheckpointModal(1)">Close</button>
+        </div>
+    </div>
+    <div id="checkpointModal2" class="modal">
+        <div class="modal-content">
+            <h3>Select Code Option for Checkpoint 2</h3>
+            <button onclick="location.href='checkpoint2_mingw.html'">Code (MinGW Compiler)</button>
+            <button onclick="location.href='checkpoint2_msvc.html'">Code (MSVC)</button>
+            <button onclick="closeCheckpointModal(2)">Close</button>
+        </div>
+    </div>
+    <div id="checkpointModal3" class="modal">
+        <div class="modal-content">
+            <h3>Select Code Option for Checkpoint 3</h3>
+            <button onclick="location.href='checkpoint3_mingw.html'">Code (MinGW Compiler)</button>
+            <button onclick="location.href='checkpoint3_msvc.html'">Code (MSVC)</button>
+            <button onclick="closeCheckpointModal(3)">Close</button>
+        </div>
+    </div>
+    <div id="checkpointModal4" class="modal">
+        <div class="modal-content">
+            <h3>Select Code Option for Checkpoint 4</h3>
+            <button onclick="location.href='checkpoint4_mingw.html'">Code (MinGW Compiler)</button>
+            <button onclick="location.href='checkpoint4_msvc.html'">Code (MSVC)</button>
+            <button onclick="closeCheckpointModal(4)">Close</button>
+        </div>
+    </div>
+    <div id="checkpointModal5" class="modal">
+        <div class="modal-content">
+            <h3>Select Code Option for Checkpoint 5</h3>
+            <button onclick="location.href='checkpoint5_mingw.html'">Code (MinGW Compiler)</button>
+            <button onclick="location.href='checkpoint5_msvc.html'">Code (MSVC)</button>
+            <button onclick="closeCheckpointModal(5)">Close</button>
+        </div>
+    </div>
+    <div id="checkpointModal6" class="modal">
+        <div class="modal-content">
+            <h3>Select Code Option for Checkpoint 6</h3>
+            <button onclick="location.href='checkpoint6_mingw.html'">Code (MinGW Compiler)</button>
+            <button onclick="location.href='checkpoint6_msvc.html'">Code (MSVC)</button>
+            <button onclick="closeCheckpointModal(6)">Close</button>
+        </div>
+    </div>
+    <div id="checkpointModal7" class="modal">
+        <div class="modal-content">
+            <h3>Select Code Option for Checkpoint 7</h3>
+            <button onclick="location.href='checkpoint7_mingw.html'">Code (MinGW Compiler)</button>
+            <button onclick="location.href='checkpoint7_msvc.html'">Code (MSVC)</button>
+            <button onclick="closeCheckpointModal(7)">Close</button>
+        </div>
+    </div>
+    <div id="checkpointModal8" class="modal">
+        <div class="modal-content">
+            <h3>Select Code Option for Checkpoint 8</h3>
+            <button onclick="location.href='checkpoint8_mingw.html'">Code (MinGW Compiler)</button>
+            <button onclick="location.href='checkpoint8_msvc.html'">Code (MSVC)</button>
+            <button onclick="closeCheckpointModal(8)">Close</button>
+        </div>
+    </div>
+</body>
+</html>
