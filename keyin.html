@@ -18,7 +18,7 @@
             justify-content: space-between;
             background: #abcdf9;
             padding: 10px;
-            position: fixed; /* Make navbar fixed */
+            position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
@@ -38,7 +38,7 @@
         }
         .container {
             width: 80%;
-            margin: 100px auto; /* Add margin to account for fixed navbar */
+            margin: 100px auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -96,9 +96,9 @@
     <nav class="navbar">
         <img src="kuliah2.png" alt="Logo" class="logo" width="40">
         <div>
-            <a href="Explorgramming.html">Home</a>
+            <a href="index.html">Home</a>
             <a href="faciAccess.html">Checkpoints</a>
-            <a href="Leaderboard.html">Leaderboard</a>
+            <a href="leaderboard.html">Leaderboard</a>
             <a href="contact.html">Contact</a>
         </div>
     </nav>
@@ -117,7 +117,7 @@
             </thead>
             <tbody id="summaryTable"></tbody>
         </table>
-        <button onclick="location.href='Leaderboard.html'" style="margin-top: 20px;">Go to Leaderboard</button>
+        <button onclick="location.href='leaderboard.html'" style="margin-top: 20px;">Go to Leaderboard</button>
     </div>
     <script>
         const groups = 8;
@@ -178,13 +178,13 @@
                         const time = checkpointData[cp][g].time;
                         if (time) {
                             const [minutes, seconds] = time.split(":").map(Number);
-                            totalTime += minutes * 60 + seconds; // Convert mm:ss to total seconds
+                            totalTime += minutes * 60 + seconds;
                         }
                         totalCorrect += checkpointData[cp][g].correct;
                         totalWrong += checkpointData[cp][g].wrong;
                     }
                 }
-                const formattedTime = `${Math.floor(totalTime / 60)}:${String(totalTime % 60).padStart(2, "0")}`; // Convert seconds back to mm:ss
+                const formattedTime = `${Math.floor(totalTime / 60)}:${String(totalTime % 60).padStart(2, "0")}`;
                 summaryTable.innerHTML += `<tr>
                     <td>${g}</td>
                     <td>${formattedTime}</td>
@@ -195,7 +195,7 @@
         }
 
         createSections();
-        calculateSummary(); // Recalculate summary on page load
+        calculateSummary();
     </script>
 </body>
 </html>
