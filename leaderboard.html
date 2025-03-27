@@ -19,7 +19,7 @@
             justify-content: space-between;
             background: #abcdf9;
             padding: 10px;
-            position: fixed; /* Make navbar fixed */
+            position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
@@ -39,7 +39,7 @@
         }
         .container {
             width: 60%;
-            margin: 100px auto; /* Add margin to account for fixed navbar */
+            margin: 100px auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -63,8 +63,8 @@
             color: white;
         }
         button {
-            display: inline-block; /* Change to inline-block for centering */
-            margin: 20px auto; /* Center the button */
+            display: inline-block;
+            margin: 20px auto;
             padding: 10px;
             background: #28a745;
             color: white;
@@ -81,8 +81,8 @@
     <nav class="navbar">
         <img src="kuliah2.png" alt="Logo" class="logo" width="40">
         <div>
-            <a href="Explorgramming.html">Home</a>
-            <a href="Leaderboard.html">Leaderboard</a>
+            <a href="index.html">Home</a>
+            <a href="leaderboard.html">Leaderboard</a>
             <a href="contact.html">Contact</a>
         </div>
     </nav>
@@ -100,7 +100,7 @@
             </thead>
             <tbody id="leaderboardBody"></tbody>
         </table>
-        <button onclick="location.href='Explorgramming.html'">Back</button>
+        <button onclick="location.href='index.html'">Back</button>
     </div>
 
     <script>
@@ -139,15 +139,13 @@
                 });
             }
 
-            // Sort scores by total correct answers (descending), then by total time taken (ascending)
             scores.sort((a, b) => {
                 if (b.correct === a.correct) {
-                    return a.time - b.time; // Less time taken is better
+                    return a.time - b.time;
                 }
-                return b.correct - a.correct; // Higher score is better
+                return b.correct - a.correct;
             });
 
-            // Populate leaderboard table
             scores.forEach((entry, index) => {
                 const formattedTime = `${Math.floor(entry.time / 60)}:${String(entry.time % 60).padStart(2, "0")}`; // Convert seconds back to mm:ss
                 const row = `<tr>
