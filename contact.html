@@ -20,7 +20,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 100px; /* Add margin to account for fixed navbar */
+            margin-top: 100px;
         }
         h1 {
             color: #333;
@@ -42,7 +42,7 @@
             text-decoration: underline;
         }
         .whatsapp-button {
-            display: inline-block; /* Change to inline-block for centering */
+            display: inline-block;
             background: #25D366;
             color: white;
             padding: 12px 20px;
@@ -50,7 +50,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin: 10px auto; /* Center the button */
+            margin: 10px auto;
         }
         .whatsapp-button:hover {
             opacity: 0.8;
@@ -61,7 +61,7 @@
             justify-content: space-between;
             background: #abcdf9;
             padding: 10px;
-            position: fixed; /* Make navbar fixed */
+            position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
@@ -82,10 +82,10 @@
     </style>
     <script>
         function openWhatsApp() {
-            let phoneNumber = "60179017108"; // Change to your WhatsApp number (without +)
+            let phoneNumber = "60179017108";
             let message = encodeURIComponent("Hello, I have a question regarding Explorgramming.");
             let whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
-            window.open(whatsappURL, "_blank"); // Opens WhatsApp in new tab
+            window.open(whatsappURL, "_blank");
         }
     </script>
 </head>
@@ -93,8 +93,8 @@
     <nav class="navbar">
         <img src="kuliah2.png" alt="Logo" class="logo" width="40">
         <div>
-            <a href="Explorgramming.html">Home</a>
-            <a href="Leaderboard.html">Leaderboard</a>
+            <a href="index.html">Home</a>
+            <a href="leaderboard.html">Leaderboard</a>
             <a href="contact.html">Contact</a>
         </div>
     </nav>
