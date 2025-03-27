@@ -19,7 +19,7 @@
             justify-content: space-between;
             background: #abcdf9;
             padding: 10px;
-            position: fixed; /* Make navbar fixed */
+            position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
@@ -27,7 +27,7 @@
         .navbar img {
             height: 40px;
             margin-right: 15px;
-            margin-left: 10px; /* Add margin to separate from edge */
+            margin-left: 10px;
         }
         .navbar a {
             color: white;
@@ -39,7 +39,7 @@
         }
         .container {
             width: 60%;
-            margin: 100px auto; /* Add margin to account for fixed navbar */
+            margin: 100px auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -57,7 +57,7 @@
         .facilitator { background: #28a745; color: white; }
         .participant { background: #007BFF; color: white; }
         button:hover { opacity: 0.8; }
-        /* Add styles for the modal */
+        
         .modal {
             display: none;
             position: fixed;
@@ -120,8 +120,8 @@
     <nav class="navbar">
         <img src="kuliah2.png" alt="Logo" class="logo" width="40">
         <div>
-            <a href="Explorgramming.html">Home</a>
-            <a href="Leaderboard.html">Leaderboard</a>
+            <a href="index.html">Home</a>
+            <a href="leaderboard.html">Leaderboard</a>
             <a href="contact.html">Contact</a>
         </div>
     </nav>
@@ -132,7 +132,6 @@
         <button class="participant" onclick="location.href='leaderboard.html'">Participant View</button>
     </div>
 
-    <!-- Modal for password -->
     <div id="passwordModal" class="modal">
         <div class="modal-content">
             <h3>Enter Facilitator Password</h3>
