@@ -5,59 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explorgramming System</title>
     <link rel="icon" type="image/png" href="kuliah2.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', Arial, sans-serif;
             margin: 0;
             padding: 0;
             text-align: center;
-            background-color: #f4f4f4;
+            background-color: #fdfdfd; /* Light creme background */
+            overflow: hidden; /* Prevent scrolling initially */
         }
         .navbar {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            background: #abcdf9;
-            padding: 10px;
+            justify-content: flex-start;
+            background: linear-gradient(to right, #f5f5f5, #eaeaea); /* White to light grey gradient */
+            padding: 10px 20px;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .navbar:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
         .navbar img {
-            height: 40px;
-            margin-right: 15px;
-            margin-left: 10px;
+            height: 50px;
+            margin-right: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .navbar img:hover {
+            transform: scale(1.1);
+        }
+        .navbar div {
+            display: flex;
+            gap: 15px;
         }
         .navbar a {
-            color: white;
+            color: #555; /* Dark grey */
             text-decoration: none;
             padding: 10px 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
         }
         .navbar a:hover {
-            background: #575757;
+            background: rgba(85, 85, 85, 0.1); /* Light grey hover effect */
+            transform: scale(1.1);
+        }
+        .navbar a.active {
+            background: rgba(85, 85, 85, 0.2); /* Active link background */
         }
         .container {
-            width: 60%;
-            margin: 100px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            margin: 0 auto; /* Remove extra margins */
+            background: #ffffff; /* White background */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
         }
-        h1 { color: #333; }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        h1, h2 {
+            font-family: 'Poppins', Arial, sans-serif;
+            font-weight: 700;
+            color: #e4e4e4; /* Dark grey */
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-family: 'Poppins', Arial, sans-serif;
+            font-weight: 300;
+            color: #e9e9e9; /* Medium grey */
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
         button {
-            padding: 10px;
-            margin: 10px;
+            font-family: 'Poppins', Arial, sans-serif;
+            font-weight: 600;
+            padding: 12px 25px;
+            margin: 15px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            background: #eaeaea; /* Light grey */
+            color: #333; /* Dark grey */
         }
-        .facilitator { background: #28a745; color: white; }
-        .participant { background: #007BFF; color: white; }
-        button:hover { opacity: 0.8; }
-        
+        .facilitator {
+            background: #28a745;
+            color: white;
+        }
+        .participant {
+            background: #007BFF;
+            color: white;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: #d6d6d6; /* Slightly darker grey */
+        }
         .modal {
             display: none;
             position: fixed;
@@ -70,31 +130,640 @@
             background-color: rgba(0, 0, 0, 0.4);
         }
         .modal-content {
-            background-color: #fefefe;
+            background-color: #ffffff;
             margin: 15% auto;
-            padding: 20px;
+            padding: 25px;
             border: 1px solid #888;
             width: 30%;
-            border-radius: 10px;
+            border-radius: 15px;
             text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         .modal-content input {
-            width: 80%;
-            padding: 10px;
+            width: 90%;
+            padding: 12px;
             margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1rem;
         }
         .modal-content button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             background-color: #28a745;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
         .modal-content button:hover {
-            background-color: #218838;
+            transform: scale(1.05);
+        }
+        .version-label {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: #f8d7e4; /* Soft pink */
+            color: #5a4d7a; /* Soft purple */
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        .version-label:hover {
+            background: #f3e5f5; /* Lavender hover effect */
+        }
+        .update-modal {
+            display: none;
+            position: fixed;
+            z-index: 2;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .update-modal-content {
+            background-color: #ffffff;
+            margin: 15% auto;
+            padding: 30px;
+            border: 1px solid #d8d8d8;
+            width: 40%;
+            border-radius: 15px;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .update-modal-content h3 {
+            color: #0056b3;
+            margin-bottom: 20px;
+        }
+        .update-modal-content ul {
+            padding-left: 20px;
+            color: #555;
+            font-size: 1rem;
+        }
+        .update-modal-content button {
+            padding: 12px 25px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .update-modal-content button:hover {
+            transform: scale(1.05);
+        }
+        .main-interface {
+            width: 100%;
+            height: 100vh; /* Ensure it fits the viewport height */
+            background: linear-gradient(to right, #fdf5e6, #ffcc99); /* Creme to sunset gradient */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden; /* Prevent content overflow */
+        }
+        .main-interface h1 {
+            font-size: 3rem;
+            color: #333; /* Dark grey */
+            margin-bottom: 20px;
+        }
+        .main-interface p {
+            font-size: 1.2rem;
+            color: #666; /* Medium grey */
+            margin-bottom: 30px;
+        }
+        .main-interface button {
+            padding: 15px 30px;
+            font-size: 1rem;
+            background-color: #eaeaea; /* Light grey */
+            color: #333; /* Dark grey */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .main-interface button:hover {
+            background-color: #d6d6d6; /* Slightly darker grey */
+        }
+        .main-interface .tagline {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 15px;
+            z-index: 2;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        .main-interface .description {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            z-index: 2;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .main-interface .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            z-index: 2;
+        }
+        .main-interface .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: transform 0.3s, color 0.3s;
+        }
+        .main-interface .social-icons a:hover {
+            transform: scale(1.2);
+            color: #007BFF;
+        }
+        html {
+            scroll-behavior: smooth; /* Ensure smooth scrolling */
+        }
+        .fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        .album-section {
+            margin: 60px auto;
+            width: 90%;
+            text-align: center;
+            background: #f9f9f9; /* Light background for contrast */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .album-section h2 {
+            color: #ffffff; /* Distinguishable blue */
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        .album-slider {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 450px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: #ffffff; /* White background for images */
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.8s ease-in-out; /* Smoother transition */
+            height: 100%;
+        }
+        .slides img {
+            width: auto; /* Use the real width of the image */
+            height: auto; /* Use the real height of the image */
+            flex-shrink: 0;
+            border: 2px solid #ffcc99;
+            border-radius: 0;
+            opacity: 0; /* Start hidden */
+            transform: scale(0.8); /* Start slightly smaller */
+            animation: pieceByPiece 0.8s ease-in-out forwards;
+        }
+
+        .slides img:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .slides img:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .slides img:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .slides img:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .slides img:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes pieceByPiece {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #00f2ff, #007bff); /* Futuristic gradient */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.6), 0 0 30px rgba(0, 123, 255, 0.4); /* Glowing effect */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .prev:hover, .next:hover {
+            transform: scale(1.2); /* Slight zoom on hover */
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.8), 0 0 50px rgba(0, 123, 255, 0.6); /* Brighter glow */
+        }
+
+        .prev::before, .next::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3); /* Outer ring */
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.3;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #mainContent {
+            display: none; /* Ensure this is hidden initially */
+            overflow: visible; /* Allow scrolling when displayed */
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #003d80;
+        }
+
+        /* Starfield effect */
+        .starfield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Enhance button hover effects */
+        .main-interface button {
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .main-interface button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s ease-in-out;
+        }
+
+        .main-interface button:hover::before {
+            left: 0;
+        }
+
+        /* Add a pattern overlay to the background */
+        .pattern-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            animation: movePattern 10s linear infinite;
+        }
+
+        @keyframes movePattern {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 100px 100px;
+            }
+        }
+
+        /* Adjust z-index of particles to appear below the pattern */
+        .particles {
+            z-index: 1;
+        }
+
+        /* Remove geometric art styles */
+        .geometric-art {
+            display: none; /* Hide the geometric art container */
+        }
+
+        /* Dynamic gradient animation */
+        .animated-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, #00264d, #0056b3, #69b1ff);
+            background-size: 300% 300%;
+            animation: gradientShift 10s ease infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Add smooth transition for elements */
+        .main-interface {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .main-interface * {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .main-interface:hover .tagline {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+
+        .main-interface:hover .description {
+            transform: translateY(-10px);
+            opacity: 0.8;
+        }
+
+        /* Brighten text colors */
+        .main-interface h1 {
+            color: #ffffff; /* Bright white */
+            color: #ffffff; /* Bright white */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+            font-size: 3.5rem; /* Slightly larger for emphasis */
+            margin-bottom: 20px;
+        }
+
+        .main-interface .tagline {
+            color: #ffcc00; /* Bright yellow for contrast */
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.8), 0 0 20px rgba(255, 204, 0, 0.6);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .main-interface .description {
+            color: #ffffff; /* Bright white */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* Adjust positioning for better alignment */
+        .main-interface .title-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .main-interface button {
+            color: #ffffff; /* Bright button text */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Center all elements */
+        .main-interface {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Ensure the title is visible */
+        .main-interface .title-container {
+            position: relative;
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .main-interface h1 {
+            color: #ffffff; /* Bright white */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .main-interface .tagline {
+            color: #ffcc00; /* Bright yellow for contrast */
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.8), 0 0 20px rgba(255, 204, 0, 0.6);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .main-interface .description {
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .main-interface button {
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Center the Select Role section */
+        #roleSelection {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 50px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+        }
+
+        #roleSelection h1 {
+            color: #0056b3;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        #roleSelection p {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        #roleSelection button {
+            margin: 10px;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        #roleSelection button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Add background colors for each section */
+        #mainContent header {
+            background: linear-gradient(to right, #0056b3, #69b1ff); /* Blue gradient */
+            color: white;
+        }
+
+        #roleSelection {
+            background: #f0f4f8; /* Light gray */
+        }
+
+        .album-section {
+            background: #ffffff; /* White */
+        }
+
+        /* Add padding to sections for better spacing */
+        #mainContent header,
+        #roleSelection,
+        .album-section {
+            padding: 50px 20px;
+        }
+
+        /* Style for the mute/unmute button */
+        .mute-button {
+            display: none;
+        }
+
+        /* Add zoom-in animation */
+        @keyframes zoomIn {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .zoom-out {
+            animation: zoomIn 0.5s forwards;
         }
     </style>
     <script>
@@ -114,24 +783,163 @@
                 alert("Incorrect password! Access denied.");
             }
         }
+
+        function openUpdateModal() {
+            document.getElementById("updateModal").style.display = "block";
+        }
+
+        function closeUpdateModal() {
+            document.getElementById("updateModal").style.display = "none";
+        }
+
+        function showMainContent() {
+            const landingPage = document.querySelector(".main-interface");
+            const mainContent = document.getElementById("mainContent");
+            const navbar = document.querySelector(".navbar");
+
+            // Enable scrolling by removing overflow: hidden from the body
+            document.body.style.overflow = "auto";
+
+            // Add zoom-out effect
+            landingPage.classList.add("zoom-out");
+
+            setTimeout(() => {
+                landingPage.style.display = "none";
+                navbar.style.display = "flex";
+                mainContent.style.display = "block"; // Ensure mainContent is displayed
+                mainContent.scrollIntoView({ behavior: "smooth" });
+
+                // Trigger animations after showing main content
+                initializeScrollAnimations();
+            }, 500); // Match the duration of the zoom-in animation
+        }
+
+        let currentSlide = 0;
+
+        function moveSlide(direction) {
+            const slides = document.querySelector('.slides');
+            const totalSlides = slides.children.length;
+
+            // Reset animations for all images
+            Array.from(slides.children).forEach((img) => {
+                img.style.animation = 'none';
+                void img.offsetWidth; // Trigger reflow to restart animation
+                img.style.animation = 'pieceByPiece 0.8s ease-in-out forwards';
+            });
+
+            // Update currentSlide index
+            currentSlide += direction;
+
+            // Loop back to the first slide if at the end
+            if (currentSlide >= totalSlides) {
+                currentSlide = 0;
+            }
+
+            // Loop to the last slide if going backward from the first slide
+            if (currentSlide < 0) {
+                currentSlide = totalSlides - 1;
+            }
+
+            // Apply the transform to slide
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            const windowHeight = window.innerHeight;
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        function initializeScrollAnimations() {
+            document.addEventListener('scroll', handleScrollAnimations);
+            handleScrollAnimations(); // Trigger animations for elements already in view
+        }
     </script>
 </head>
 <body>
-    <nav class="navbar">
-        <img src="kuliah2.png" alt="Logo" class="logo" width="40">
+    <nav class="navbar" style="display: none;">
+        <img src="kuliah2.png" alt="Logo" class="logo">
         <div>
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="leaderboard.html">Leaderboard</a>
             <a href="contact.html">Contact</a>
         </div>
     </nav>
-    <div class="container">
-        <h1>Explorgramming</h1>
-        <p>Select your role:</p>
-        <button class="facilitator" onclick="openPasswordModal()">Facilitator View</button>
-        <button class="participant" onclick="location.href='leaderboard.html'">Participant View</button>
+
+    <!-- Main Interface -->
+    <div class="main-interface" style="display: flex; align-items: center; justify-content: space-between; padding: 50px; background: linear-gradient(to right, #fdf5e6, #ffcc99); height: 100vh; font-family: 'Poppins', Arial, sans-serif; position: relative; overflow: hidden;">
+        <!-- Animated background -->
+        <div class="animated-background"></div>
+        <!-- Pattern overlay -->
+        <div class="pattern-overlay"></div>
+        <!-- Starfield effect container -->
+        <div class="starfield">
+            <script>
+                const starfieldContainer = document.querySelector('.starfield');
+                for (let i = 0; i < 100; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add('star');
+                    star.style.top = `${Math.random() * 100}%`;
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.animationDelay = `${Math.random() * 3}s`;
+                    starfieldContainer.appendChild(star);
+                }
+            </script>
+        </div>
+        <!-- Left Section -->
+        <div style="text-align: left; max-width: 50%; padding-right: 30px; animation: fadeInLeft 1s ease-in-out;">
+            <div class="title-container">
+                <h1>Explorgramming</h1>
+                <p class="tagline">Learn, Explore, and Compete!</p>
+            </div>
+            <p class="description">Dive into the world of programming with interactive challenges. Combining both explore race and quizzes concept.</p>
+            <button onclick="showMainContent()" style="background-color: #0056b3; color: white; padding: 10px 20px; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: transform 0.3s, background-color 0.3s;">Get Started</button>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div style="position: absolute; top: -50px; left: -50px; width: 150px; height: 150px; background: #69b1ff; border-radius: 50%; opacity: 0.2; animation: float 6s infinite;"></div>
+        <div style="position: absolute; bottom: -50px; right: -50px; width: 200px; height: 200px; background: #0056b3; border-radius: 50%; opacity: 0.2; animation: float 8s infinite reverse;"></div>
     </div>
 
+    <!-- Main Content -->
+    <div id="mainContent" style="display: none;"> <!-- Ensure this is hidden initially -->
+        <header class="fade-in" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('nature4k.jpg') center/cover no-repeat; color: white; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;">
+            <h1 style="font-size: 4rem; margin-bottom: 20px;">Welcome to the Explorgramming</h1>
+            <p style="font-size: 1.5rem; max-width: 800px; line-height: 1.8;">Explore the world of programming with interactive challenges and exciting activities.</p>
+        </header>
+
+        <!-- Select Role Section -->
+        <div id="roleSelection" class="container fade-in">
+            <h1>Explorgramming</h1>
+            <p>Select your role:</p>
+            <button class="facilitator" onclick="openPasswordModal()">Facilitator View</button>
+            <button class="participant" onclick="location.href='leaderboard.html'">Participant View</button>
+        </div>
+
+        <!-- Album Section -->
+        <div class="album-section fade-in" style="margin: 50px auto; width: 90%; text-align: center;">
+            <h2 style="color: #333; margin-bottom: 20px;">Past Explorgramming Events</h2>
+            <div class="album-slider" style="position: relative; overflow: hidden; width: 100%; max-width: 1000px; margin: 0 auto; height: 400px;">
+                <div class="slides" style="display: flex; transition: transform 0.8s ease-in-out; height: 100%;">
+                    <img src="a1.jpg" alt="Picture 1" style="width: 100%; flex-shrink: 0; border-radius: 10px; object-fit: cover; border: 2px solid #ffcc9900;">
+                    <img src="a2.jpg" alt="Picture 2" style="width: 100%; flex-shrink: 0; border-radius: 10px; object-fit: cover; border: 2px solid #ffcc9900;">
+                    <img src="a3.jpg" alt="Picture 3" style="width: 100%; flex-shrink: 0; border-radius: 10px; object-fit: cover; border: 2px solid #ffcc9900;">
+                    <img src="a4.jpg" alt="Picture 4" style="width: 100%; flex-shrink: 0; border-radius: 10px; object-fit: cover; border: 2px solid #ffcc9900;">
+                    <img src="a5.jpg" alt="Picture 5" style="width: 100%; flex-shrink: 0; border-radius: 10px; object-fit: cover; border: 2px solid #ffcc9900;">
+                </div>
+                <button class="prev" onclick="moveSlide(-1)" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer;">&#10094;</button>
+                <button class="next" onclick="moveSlide(1)" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer;">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for password -->
     <div id="passwordModal" class="modal">
         <div class="modal-content">
             <h3>Enter Facilitator Password</h3>
@@ -140,5 +948,28 @@
             <button onclick="closePasswordModal()">Cancel</button>
         </div>
     </div>
+
+    <!-- Version label -->
+    <div class="version-label" onclick="openUpdateModal()">
+        Version 0.10.3
+    </div>
+
+    <!-- Update modal -->
+    <div id="updateModal" class="update-modal">
+        <div class="update-modal-content">
+            <h3>What's New in Version 0.10.3</h3>
+            <ul>
+                <li>Added landing page for better user experience</li>
+                <li>Improved navigation bar hover effects.</li>
+                <li>Added animation to the main container for a smoother appearance.</li>
+                <li>Introduced a version label with clickable functionality.</li>
+                <li>Enhanced modal design for better user experience.</li>
+            </ul>
+            <button onclick="closeUpdateModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Add Font Awesome for social icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
