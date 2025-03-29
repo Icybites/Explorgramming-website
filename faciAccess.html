@@ -6,75 +6,108 @@
     <title>Explorgramming Checkpoints</title>
     <link rel="icon" type="image/png" href="kuliah2.png">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
         body { 
-            font-family: Arial, sans-serif; 
+            font-family: 'Poppins', Arial, sans-serif;
             text-align: center; 
-            background-color: #f4f4f4; 
+            background: linear-gradient(to bottom, #f0f8ff, #e6e6fa); /* Light blue to lavender gradient */
             margin: 0; 
             padding: 0; 
         }
         .navbar {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            background: #abcdf9;
-            padding: 10px;
+            justify-content: flex-start;
+            background: linear-gradient(to right, #f5f5f5, #eaeaea); /* White to light grey gradient */
+            padding: 10px 20px;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .navbar:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
         .navbar img {
-            height: 40px;
-            margin-right: 15px;
-            margin-left: 10px;
+            height: 50px;
+            margin-right: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .navbar img:hover {
+            transform: scale(1.1);
+        }
+        .navbar div {
+            display: flex;
+            gap: 15px;
         }
         .navbar a {
-            color: white;
+            color: #555; /* Dark grey */
             text-decoration: none;
             padding: 10px 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
         }
         .navbar a:hover {
-            background: #575757;
+            background: rgba(85, 85, 85, 0.1); /* Light grey hover effect */
+            transform: scale(1.1);
+        }
+        .navbar a.active {
+            background: rgba(85, 85, 85, 0.2); /* Active link background */
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         .container { 
-            width: 60%; 
-            margin: 100px auto; 
-            background: white; 
-            padding: 20px; 
-            border-radius: 10px; 
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            width: 70%; 
+            margin: 120px auto; 
+            background: #ffffff; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+            animation: slideUp 0.8s ease-out; /* Apply slide-up animation */
         }
         h1 { 
-            color: #333; 
+            color: #4b79a1; /* Blue heading */ 
         }
         ul { 
             list-style-type: none; 
             padding: 0; 
-            text-align: center;
         }
         li { 
-            margin: 10px 0; 
+            margin: 15px 0; 
         }
         a.link-button, button.link-button { 
             display: block; 
             text-decoration: none; 
             color: white; 
-            background: #007BFF; 
-            padding: 10px; 
-            border-radius: 5px; 
-            transition: 0.3s;
+            background: #4b79a1; /* Blue button */
+            padding: 15px; 
+            border-radius: 10px; 
+            transition: 0.3s ease-in-out;
             text-align: center;
             border: none;
             cursor: pointer;
             width: 100%; 
-            max-width: 600px; 
+            max-width: 500px; 
             margin: 0 auto;
+            font-weight: bold;
         }
         a.link-button:hover, button.link-button:hover { 
-            background: #0056b3; 
+            background: #3a5f7d; /* Darker blue hover effect */
+            transform: scale(1.05);
         }
-
         .modal {
             display: none;
             position: fixed;
@@ -87,10 +120,10 @@
             background-color: rgba(0, 0, 0, 0.4);
         }
         .modal-content {
-            background-color: #fefefe;
+            background-color: #ffffff;
             margin: 15% auto;
             padding: 20px;
-            border: 1px solid #007BFF;
+            border: 1px solid #4b79a1;
             width: 50%;
             border-radius: 10px;
             text-align: center;
@@ -99,41 +132,19 @@
             display: block;
             text-decoration: none;
             color: white;
-            background: #007BFF;
+            background: #4b79a1;
             padding: 10px;
             border-radius: 5px;
             margin: 10px auto;
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             text-align: center;
             transition: 0.3s;
             border: none;
             cursor: pointer;
         }
         .modal-content button:hover {
-            background: #0056b3;
-        }
-        .code-container {
-            margin-top: 20px;
-            background: #f4f4f4;
-            padding: 15px;
-            border-radius: 5px;
-            text-align: left;
-            font-family: monospace;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-        .copy-button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .copy-button:hover {
-            background-color: #218838;
+            background: #3a5f7d;
         }
     </style>
     <script>
@@ -144,45 +155,14 @@
         function closeCheckpointModal(checkpoint) {
             document.getElementById(`checkpointModal${checkpoint}`).style.display = "none";
         }
-
-        function showCode(option) {
-            const codeContainer = document.getElementById("codeContainer");
-            const copyButton = document.getElementById("copyButton");
-            if (option === "mingw") {
-                codeContainer.textContent = `#include <iostream>
-using namespace std;
-
-int main() {
-    cout << "Hello, MinGW Compiler!" << endl;
-    return 0;
-}`;
-            } else if (option === "msvc") {
-                codeContainer.textContent = `#include <iostream>
-using namespace std;
-
-int main() {
-    cout << "Hello, MSVC Compiler!" << endl;
-    return 0;
-}`;
-            }
-            copyButton.style.display = "inline-block";
-        }
-
-        function copyCode() {
-            const codeContainer = document.getElementById("codeContainer");
-            navigator.clipboard.writeText(codeContainer.textContent).then(() => {
-                alert("Code copied to clipboard!");
-            });
-        }
     </script>
 </head>
 <body>
     <nav class="navbar">
-        <img src="kuliah2.png" alt="Logo" class="logo" width="40">
+        <img src="kuliah2.png" alt="Logo" class="logo">
         <div>
             <a href="index.html">Home</a>
-            <a href="faciAccess.html">Checkpoints</a>
-            <a href="leaderboard.html">Leaderboard</a>
+            <a href="keyin.html">Leaderboard</a>
             <a href="contact.html">Contact</a>
         </div>
     </nav>
@@ -205,56 +185,56 @@ int main() {
     <div id="checkpointModal1" class="modal">
         <div class="modal-content">
             <h3>Select Code Option for Checkpoint 1</h3>
-            <button onclick="location.href='checkpoint1.html'">Checkpoint Code</button>
+            <button onclick="location.href='Checkpoint/checkpoint1.html'">Checkpoint Code</button>
             <button onclick="closeCheckpointModal(1)">Close</button>
         </div>
     </div>
     <div id="checkpointModal2" class="modal">
         <div class="modal-content">
             <h3>Select Code Option for Checkpoint 2</h3>
-            <button onclick="location.href='checkpoint2.html'">Checkpoint Code</button>
+            <button onclick="location.href='Checkpoint/checkpoint2.html'">Checkpoint Code</button>
             <button onclick="closeCheckpointModal(2)">Close</button>
         </div>
     </div>
     <div id="checkpointModal3" class="modal">
         <div class="modal-content">
             <h3>Select Code Option for Checkpoint 3</h3>
-            <button onclick="location.href='checkpoint3.html'">Checkpoint Code</button>
+            <button onclick="location.href='Checkpoint/checkpoint3.html'">Checkpoint Code</button>
             <button onclick="closeCheckpointModal(3)">Close</button>
         </div>
     </div>
     <div id="checkpointModal4" class="modal">
         <div class="modal-content">
             <h3>Select Code Option for Checkpoint 4</h3>
-            <button onclick="location.href='checkpoint4.html'">Checkpoint Code</button>
+            <button onclick="location.href='Checkpoint/checkpoint4.html'">Checkpoint Code</button>
             <button onclick="closeCheckpointModal(4)">Close</button>
         </div>
     </div>
     <div id="checkpointModal5" class="modal">
         <div class="modal-content">
             <h3>Select Code Option for Checkpoint 5</h3>
-            <button onclick="location.href='checkpoint5.html'">Checkpoint Code</button>
+            <button onclick="location.href='Checkpoint/checkpoint5.html'">Checkpoint Code</button>
             <button onclick="closeCheckpointModal(5)">Close</button>
         </div>
     </div>
     <div id="checkpointModal6" class="modal">
         <div class="modal-content">
             <h3>Select Code Option for Checkpoint 6</h3>
-            <button onclick="location.href='checkpoint6.html'">Checkpoint Code</button>
+            <button onclick="location.href='Checkpoint/checkpoint6.html'">Checkpoint Code</button>
             <button onclick="closeCheckpointModal(6)">Close</button>
         </div>
     </div>
     <div id="checkpointModal7" class="modal">
         <div class="modal-content">
             <h3>Select Code Option for Checkpoint 7</h3>
-            <button onclick="location.href='checkpoint7.html'">Checkpoint Code</button>
+            <button onclick="location.href='Checkpoint/checkpoint7.html'">Checkpoint Code</button>
             <button onclick="closeCheckpointModal(7)">Close</button>
         </div>
     </div>
     <div id="checkpointModal8" class="modal">
         <div class="modal-content">
             <h3>Select Code Option for Checkpoint 8</h3>
-            <button onclick="location.href='checkpoint8.html'">Checkpoint Code</button>
+            <button onclick="location.href='Checkpoint/checkpoint8.html'">Checkpoint Code</button>
             <button onclick="closeCheckpointModal(8)">Close</button>
         </div>
     </div>
