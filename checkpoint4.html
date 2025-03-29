@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkpoint 4</title>
+    <title>Checkpoint 4</title>
     <link rel="icon" type="image/png" href="kuliah2.png">
     <style>
         body {
@@ -20,6 +21,17 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         pre {
             background: #f4f4f4;
@@ -40,19 +52,44 @@
             margin: 10px auto;
             width: auto;
             text-align: center;
-            transition: 0.3s;
+            transition: background 0.3s, transform 0.2s;
             border: none;
             cursor: pointer;
         }
         .copy-button:hover {
             background: #0056b3;
+            transform: scale(1.1);
+        }
+        .copy-notice {
+            display: none;
+            color: green;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .floating-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            z-index: 1000;
         }
     </style>
     <script>
         function copyCode() {
             const code = document.getElementById("code").textContent;
             navigator.clipboard.writeText(code).then(() => {
-                alert("Code copied to clipboard!");
+                const message = document.getElementById("floating-message");
+                message.style.display = "block";
+                setTimeout(() => {
+                    message.style.display = "none";
+                }, 2000);
             });
         }
     </script>
@@ -109,14 +146,14 @@ void Quiz(int totalQuestions) {
     const int timeLimit = 10 * 60;
     
     printf("\nStarting the quiz!\n");
-    time(&startTime);
+    time(&amp;startTime);
     
     for (int i = 0; i < totalQuestions; i++) {
         int attempts = 0;
         int isCorrect = 0;
         
         while (attempts < 2 && !isCorrect) {
-            time(&currentTime);
+            time(&amp;currentTime);
             if (difftime(currentTime, startTime) >= timeLimit) {
                 printf("\033[1;31mTime's up! Quiz terminated.\033[0m\n");
                 goto endQuiz;
@@ -149,7 +186,7 @@ void Quiz(int totalQuestions) {
     }
     
 endQuiz:
-    time(&endTime);
+    time(&amp;endTime);
     double timeTaken = difftime(endTime, startTime);
     int minutes = (int)(timeTaken / 60);
     double seconds = fmod(timeTaken, 60);
@@ -184,7 +221,9 @@ int main() {
     return 0;
 }
         </pre>
+        <div id="floating-message" class="floating-message">Code copied to clipboard!</div>
         <button class="copy-button" onclick="copyCode()">Copy Code</button>
+        <p id="copy-notice" class="copy-notice">Code copied to clipboard!</p>
         <button class="copy-button" onclick="window.location.href='faciAccess.html'">Go Back</button>
     </div>
 </body>

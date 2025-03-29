@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkpoint 1</title>
-    <title>Checkpoint 1</title>
+    <title>Checkpoint 2</title>
+    <title>Checkpoint 2</title>
     <link rel="icon" type="image/png" href="kuliah2.png">
     <style>
         body {
@@ -96,7 +96,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Checkpoint 1</h1>
+        <h1>Checkpoint 2</h1>
         <pre id="code">
 
 #include &lt;stdio.h&gt;  // For standard input/output functions
@@ -111,32 +111,32 @@
 #define MAX_QUESTIONS 10 
 
 char questions[MAX_QUESTIONS][500] = {
-    "Define the compile stage process", 
-    "Identify the error that appears after compile and run the code", 
-    "There are three types of programming languages except", 
-    "The code program is referred to as_______",
-    "What is the purpose of a compiler in programming?",
-    "Which of the following is NOT a step in the compilation process?",
-    "What type of error occurs when a program compiles successfully but produces incorrect results?",
-    "What happens if you forget a semicolon at the end of a statement in C?",
-    "What is an example of a runtime error?",
-    "What is the purpose of the return statement in a function?"
+    "What does an arrow in a flowchart indicate?", 
+    "In pseudocode, what is commonly used to represent the beginning and end of a process?", 
+    "Which statement is true about Algorithm?", 
+    "Which statement is false about Flowchart?",
+    "Which of the following correctly represents a pseudocode for a basic if-else statement in C?",
+    "Which of the following correctly represents a function header in pseudocode that takes two integers and returns their sum?",
+    "In pseudocode, how would you write a loop that executes exactly 10 times?",
+    "Which pseudocode statement correctly represents an if-else statement in C?",
+    "How would you represent array initialization in pseudocode?",
+    "Which pseudocode correctly represents reading a value from user input?",
 };
 
-char choices[MAX_QUESTIONS][4][500] = {
-    {"A. The object code is linked with code for functions in other files\nB. The C program in translated into machine language code\nC. The program is executed one instruction at a time\nD. The program is placed in memory"}, 
-    {"A. Syntax\nB. Logical\nC. Run-time\nD. Compile"}, 
-    {"A. Machine Language\nB. Assembly\nC. Robot Language\nD. High-Level language"}, 
-    {"A. Compiler Code\nB. Pseudocode\nC. Source Code\nD. Basic Code"},
-    {"A. To execute code line by line\nB. To translate high-level code into machine code\nC. To debug runtime errors\nD. To manage memory allocation"},
-    {"A. Preprocessing\nB. Linking\nC. Interpretation\nD. Assembly"},
-    {"A. Syntax error\nB. Logical error\nC. Runtime error\nD. Linker error"},
-    {"A. The program runs but gives incorrect output\nB. A syntax error occurs during compilation\nC. The program executes but skips that line\nD. Nothing happens"},
-    {"A. Missing semicolon\nB. Using an undeclared variable\nC. Dividing a number by zero\nD. Incorrect loop syntax"},
-    {"A. To declare the function's return type\nB. To exit the program\nC. To return a value from the function\nD. To define the function"}
+char choices[MAX_QUESTIONS][10][500] = {
+    {"A. Input/Output\nB. Decision\nC. Connector\nD. Flow of control or direction"}, 
+    {"A. Start/End\nB. Process\nC. Input/Output\nD. Decision"}, 
+    {"A. Algorithm is produced after coding a Code in C\nB. Algorithm is one of the Implementation phases in PDLC\nC. Algorithm is needed before produce flowcart\nD. Algorithm is a visual flow of C code"}, 
+    {"A. Visualization of logic\nB. Structured design and documentation\nC. Standardization\nD. Difficult to understand"},
+    {"A. IF (condition) THEN\nstatements\nELSE\nstatements\nEND IF\nB.  IF condition DO\nstatements\nELSE DO\nstatements\nEND\nC.  WHEN condition THEN\nstatements\nOTHERWISE\nstatements\nEND WHEN\nD. CHECK condition\nstatements\nELSE\nstatements\nEND CHECK"},
+    {"A. FUNCTION Sum(a, b) RETURNS INTEGER\nB. INTEGER Sum(a, b)\nC. void Sum(int a, int b)\nD. Sum(a, b) → INTEGER"},
+    {"A. WHILE counter < 10 DO\nB. FOR counter FROM 1 TO 10 DO\nC. REPEAT UNTIL counter = 10\nD. DO WHILE counter <= 10"},
+    {"A. IF condition THEN action1 ELSE action2\nB. IF (condition) BEGIN action1 END ELSE BEGIN action2 END\nC. WHEN condition DO action1 OTHERWISE action2\nD. CHECK condition THEN action1 OR action2"},
+    {"A. DECLARE array[5] = {1, 2, 3, 4, 5}\nB. SET array TO [1, 2, 3, 4, 5]\nC. ARRAY array[5] := [1, 2, 3, 4, 5]\nD. INITIALIZE array(5) WITH 1, 2, 3, 4, 5"},
+    {"A. INPUT value\nB. READ value\nC.  SCAN value\nD. GET value"},
 };
 
-char correctAnswers[MAX_QUESTIONS] = {'B', 'C', 'C', 'C', 'B', 'C', 'B', 'B', 'C', 'C'};
+char correctAnswers[MAX_QUESTIONS] = {'D', 'A', 'C', 'D', 'A','A', 'B','A','B','A'};
 
 void Quiz(int totalQuestions) {
     char answer;
@@ -200,7 +200,7 @@ endQuiz:
 
 int main() {
     char password[20];
-    const char correctPassword[] = "badanamu";
+    const char correctPassword[] = "cowcing";
     
     do {
         printf("Enter the checkpoint password: ");
@@ -216,7 +216,7 @@ int main() {
     
     Quiz(10);
     
-    printf(COLOR_BOLD"\nHint for next checkpoint - 2 4 4 3 4, tahun 90-an \n\n"COLOR_OFF);
+    printf(COLOR_BOLD"\nHint for next checkpoint - Geng Plastik Hitam \n\n"COLOR_OFF);
     
     return 0;
 }
@@ -224,7 +224,7 @@ int main() {
         <div id="floating-message" class="floating-message">Code copied to clipboard!</div>
         <button class="copy-button" onclick="copyCode()">Copy Code</button>
         <p id="copy-notice" class="copy-notice">Code copied to clipboard!</p>
-        <button class="copy-button" onclick="window.location.href='../faciAccess.html'">Go Back</button>
+        <button class="copy-button" onclick="window.location.href='faciAccess.html'">Go Back</button>
     </div>
 </body>
 </html>

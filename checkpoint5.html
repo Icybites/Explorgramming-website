@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkpoint 1</title>
-    <title>Checkpoint 1</title>
+    <title>Checkpoint 5</title>
+    <title>Checkpoint 5</title>
     <link rel="icon" type="image/png" href="kuliah2.png">
     <style>
         body {
@@ -96,7 +96,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Checkpoint 1</h1>
+        <h1>Checkpoint 5</h1>
         <pre id="code">
 
 #include &lt;stdio.h&gt;  // For standard input/output functions
@@ -111,32 +111,32 @@
 #define MAX_QUESTIONS 10 
 
 char questions[MAX_QUESTIONS][500] = {
-    "Define the compile stage process", 
-    "Identify the error that appears after compile and run the code", 
-    "There are three types of programming languages except", 
-    "The code program is referred to as_______",
-    "What is the purpose of a compiler in programming?",
-    "Which of the following is NOT a step in the compilation process?",
-    "What type of error occurs when a program compiles successfully but produces incorrect results?",
-    "What happens if you forget a semicolon at the end of a statement in C?",
-    "What is an example of a runtime error?",
-    "What is the purpose of the return statement in a function?"
+    "Describe the process when a called function completes its task.", 
+    "What is the result of the function sqrt(16)  in C? Assuming proper inclusion of the math library.", 
+    "What is the purpose of the return statement in function?", 
+    "The function scanf( ) returns ________.", 
+    "Which of the following function calculates the square of 'x' in C?", 
+    "What does the return statement do in a C function?", 
+    "If a = 7.0, b = 7.0 and c = 6.0, then what is output for printf (\"%%.2f\", sqrt ( a + b * c ));", 
+    "What is the proper function for prototype for : double mySqrt(int x );",
+    "What is the primary purpose of using functions in C?",
+    "What does a function prototype in C include?",
 };
 
 char choices[MAX_QUESTIONS][4][500] = {
-    {"A. The object code is linked with code for functions in other files\nB. The C program in translated into machine language code\nC. The program is executed one instruction at a time\nD. The program is placed in memory"}, 
-    {"A. Syntax\nB. Logical\nC. Run-time\nD. Compile"}, 
-    {"A. Machine Language\nB. Assembly\nC. Robot Language\nD. High-Level language"}, 
-    {"A. Compiler Code\nB. Pseudocode\nC. Source Code\nD. Basic Code"},
-    {"A. To execute code line by line\nB. To translate high-level code into machine code\nC. To debug runtime errors\nD. To manage memory allocation"},
-    {"A. Preprocessing\nB. Linking\nC. Interpretation\nD. Assembly"},
-    {"A. Syntax error\nB. Logical error\nC. Runtime error\nD. Linker error"},
-    {"A. The program runs but gives incorrect output\nB. A syntax error occurs during compilation\nC. The program executes but skips that line\nD. Nothing happens"},
-    {"A. Missing semicolon\nB. Using an undeclared variable\nC. Dividing a number by zero\nD. Incorrect loop syntax"},
-    {"A. To declare the function's return type\nB. To exit the program\nC. To return a value from the function\nD. To define the function"}
+    {"A. Terminates program execution normally\nB. Aborts program execution\nC. Logs its result\nD. Returns to the calling function"}, 
+    {"A. 4\nB. 8\nC. 2\nD. Error"},
+    {"A. To declare the function's return type\nB. To exit the program\nC. To return a value from the function\nD. To define the function"},
+    {"A. The actual values read for each argument\nB. 1\nC. The number of successful read input values\nD. ASCII value of the input read"},
+    {"A. sqr ( x )\nB. pow ( x , 2 )\nC. pow ( 2 , x )\nD. power ( x , 2 )"},
+    {"A. Ends the program\nB. Returns a value from the function\nC. Prints output\nD. Declares a variable"},
+    {"A. 49\nB. 7.00\nC. 7\nD. 49.00"},
+    {"A. Defines a function called mySqrt which takes an integer argument and returns a double\nB. Defines a function called doiuble which calculates square roots\nC. Defines a function called mySqrt which takes an argument of type x and returns and double"},
+    {"A. To declare variables\nB. To organize code into manageable units\nC. To print output\nD. To define constants"},
+    {"A.  Function body\nB. Function name\nC. Function parameters\nD. All of the above"},
 };
 
-char correctAnswers[MAX_QUESTIONS] = {'B', 'C', 'C', 'C', 'B', 'C', 'B', 'B', 'C', 'C'};
+char correctAnswers[MAX_QUESTIONS] = {'D', 'A', 'C', 'C', 'B', 'B', 'B', 'A', 'B', 'B'};
 
 void Quiz(int totalQuestions) {
     char answer;
@@ -200,7 +200,7 @@ endQuiz:
 
 int main() {
     char password[20];
-    const char correctPassword[] = "badanamu";
+    const char correctPassword[] = "powpowpay";
     
     do {
         printf("Enter the checkpoint password: ");
@@ -216,7 +216,7 @@ int main() {
     
     Quiz(10);
     
-    printf(COLOR_BOLD"\nHint for next checkpoint - 2 4 4 3 4, tahun 90-an \n\n"COLOR_OFF);
+    printf(COLOR_BOLD"\nHint for next checkpoint - Pondok Kembar 3 \n\n"COLOR_OFF);
     
     return 0;
 }
@@ -224,7 +224,7 @@ int main() {
         <div id="floating-message" class="floating-message">Code copied to clipboard!</div>
         <button class="copy-button" onclick="copyCode()">Copy Code</button>
         <p id="copy-notice" class="copy-notice">Code copied to clipboard!</p>
-        <button class="copy-button" onclick="window.location.href='../faciAccess.html'">Go Back</button>
+        <button class="copy-button" onclick="window.location.href='faciAccess.html'">Go Back</button>
     </div>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkpoint 1</title>
-    <title>Checkpoint 1</title>
+    <title>Checkpoint 8</title>
+    <title>Checkpoint 8</title>
     <link rel="icon" type="image/png" href="kuliah2.png">
     <style>
         body {
@@ -96,7 +96,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Checkpoint 1</h1>
+        <h1>Checkpoint 8</h1>
         <pre id="code">
 
 #include &lt;stdio.h&gt;  // For standard input/output functions
@@ -111,32 +111,32 @@
 #define MAX_QUESTIONS 10 
 
 char questions[MAX_QUESTIONS][500] = {
-    "Define the compile stage process", 
-    "Identify the error that appears after compile and run the code", 
-    "There are three types of programming languages except", 
-    "The code program is referred to as_______",
-    "What is the purpose of a compiler in programming?",
-    "Which of the following is NOT a step in the compilation process?",
-    "What type of error occurs when a program compiles successfully but produces incorrect results?",
-    "What happens if you forget a semicolon at the end of a statement in C?",
-    "What is an example of a runtime error?",
-    "What is the purpose of the return statement in a function?"
+    "What is the correct syntax to declare a pointer to an integer in C?", 
+    "What will be the value of x after the following operation? x = 10 / 4;", 
+    "What will be the output of printf(\"%d\", sizeof(int)) on a 32-bit system?",
+    "Which loop executes at least once, regardless of the condition?", 
+    "What is the purpose of the malloc() function in C?",
+    "Which of the following correctly declares an array of 10 integers in C?",
+    "What will be the output of the following code?\n\nint x = 5;\nif (x > 3)\n\tprintf(\"Yes\");\nelse\n\tprintf(\"No\");",
+    "Which of the following functions is used to read a string in C?",
+    "Which header file is required for using the printf() function in C?",
+    "What is the default return type of the main() function in C?"
 };
 
 char choices[MAX_QUESTIONS][4][500] = {
-    {"A. The object code is linked with code for functions in other files\nB. The C program in translated into machine language code\nC. The program is executed one instruction at a time\nD. The program is placed in memory"}, 
-    {"A. Syntax\nB. Logical\nC. Run-time\nD. Compile"}, 
-    {"A. Machine Language\nB. Assembly\nC. Robot Language\nD. High-Level language"}, 
-    {"A. Compiler Code\nB. Pseudocode\nC. Source Code\nD. Basic Code"},
-    {"A. To execute code line by line\nB. To translate high-level code into machine code\nC. To debug runtime errors\nD. To manage memory allocation"},
-    {"A. Preprocessing\nB. Linking\nC. Interpretation\nD. Assembly"},
-    {"A. Syntax error\nB. Logical error\nC. Runtime error\nD. Linker error"},
-    {"A. The program runs but gives incorrect output\nB. A syntax error occurs during compilation\nC. The program executes but skips that line\nD. Nothing happens"},
-    {"A. Missing semicolon\nB. Using an undeclared variable\nC. Dividing a number by zero\nD. Incorrect loop syntax"},
-    {"A. To declare the function's return type\nB. To exit the program\nC. To return a value from the function\nD. To define the function"}
+    {"A. int ptr;\nB. int *ptr;\nC. pointer int ptr;\nD. int &ptr;"}, 
+    {"A. 2.5\nB. 2\nC. 3\nD. 4"}, 
+    {"A. 2\nB. 4\nC. 8\nD. 16"},
+    {"A. for loop\nB. while loop\nC. do-while loop\nD. None of the above"}, 
+    {"A. Allocates memory and initializes to zero\nB. Allocates memory dynamically\nC. Deallocates memory\nD. Copies memory"},
+    {"A. int arr[10];\nB. array arr[10];\nC. int arr = 10;\nD. arr[10] int;"},
+    {"A. No\nB. Yes\nC. Compilation error\nD. Undefined"},
+    {"A. scanf()\nB. gets()\nC. fgets()\nD. Both B and C"},
+    {"A. stdio.h\nB. conio.h\nC. string.h\nD. math.h"},
+    {"A. void\nB. int\nC. float\nD. char"}
 };
 
-char correctAnswers[MAX_QUESTIONS] = {'B', 'C', 'C', 'C', 'B', 'C', 'B', 'B', 'C', 'C'};
+char correctAnswers[MAX_QUESTIONS] = {'B', 'B', 'B', 'C', 'B', 'A', 'B', 'D', 'A', 'B'};
 
 void Quiz(int totalQuestions) {
     char answer;
@@ -200,7 +200,7 @@ endQuiz:
 
 int main() {
     char password[20];
-    const char correctPassword[] = "badanamu";
+    const char correctPassword[] = "bapple";
     
     do {
         printf("Enter the checkpoint password: ");
@@ -216,7 +216,7 @@ int main() {
     
     Quiz(10);
     
-    printf(COLOR_BOLD"\nHint for next checkpoint - 2 4 4 3 4, tahun 90-an \n\n"COLOR_OFF);
+    printf(COLOR_BOLD"\nHint for next checkpoint - Tempat Belajar\n\n"COLOR_OFF);
     
     return 0;
 }
