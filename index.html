@@ -163,18 +163,21 @@
         }
         .version-label {
             position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background: #334ac8; /* Soft pink */
-            color: #f6f6f6; /* Soft purple */
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #0056b3, #69b1ff);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .version-label:hover {
-            background: #f3e5f5; /* Lavender hover effect */
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
         .update-modal {
             display: none;
@@ -188,28 +191,50 @@
             background-color: rgba(0, 0, 0, 0.4);
         }
         .update-modal-content {
-            background-color: #ffffff;
-            margin: 10% auto;
+            background-color: #f9f9f9;
+            position: fixed; /* Ensure it stays in the center */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for exact centering */
             padding: 30px;
-            border: 1px solid #d8d8d8;
+            border: none;
             width: 40%;
             border-radius: 15px;
             text-align: left;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            max-height: 70vh; /* Limit height */
-            overflow-y: auto; /* Enable vertical scrolling */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            max-height: 70vh;
+            overflow-y: auto;
         }
         .update-modal-content h3 {
             color: #0056b3;
             margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
         }
         .update-modal-content ul {
             padding-left: 20px;
-            color: #555;
+            color: #333;
             font-size: 1rem;
         }
         .update-modal-content ul li {
-            margin-bottom: 10px; /* Add spacing between items */
+            margin-bottom: 10px;
+        }
+        .update-modal-content button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #0056b3, #69b1ff);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .update-modal-content button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(45deg, #003d80, #0056b3);
         }
         .main-interface {
             width: 100%;
@@ -790,8 +815,6 @@
         /* Adjust main news container size */
         .news-section > div:first-child {
             flex: 1; /* Reduce the width of the main news */
-            overflow: hidden; /* Ensure the pulsing effect applies to the entire box */
-            position: relative; /* Ensure the container is positioned for the effect */
         }
 
         .news-section h3 {
@@ -807,83 +830,6 @@
         .news-section h3, .news-section h4 {
             animation: fadeIn 1.5s ease-in-out; /* Add fade-in animation for titles */
         }
-        /* General layout */
-    .news-container {
-        display: flex;
-        gap: 20px;
-        align-items: flex-start;
-    }
-
-    /* Main News - Half Page */
-    .main-news {
-        flex: 1;
-        max-width: 50%; /* Ensures it takes only half the page */
-        background: #1a1a1a;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease-in-out;
-        animation: pulse 2s infinite;
-    }
-
-    /* Pulse Effect */
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.02); }
-        100% { transform: scale(1); }
-    }
-
-    /* Main News Image */
-    .main-news img {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    .news-content {
-        padding: 20px;
-        color: white;
-    }
-
-    /* Side News Container */
-    .side-news-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    /* Side News - Taller Items */
-    .side-news {
-        display: flex;
-        height: 200px; /* Makes them vertically longer */
-        background: #1a1a1a;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        align-items: center;
-        transition: transform 0.3s ease-in-out;
-    }
-
-    /* Hover effect */
-    .side-news:hover {
-        transform: scale(1.05);
-    }
-
-    /* Side News Image */
-    .side-news img {
-        width: 40%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* Side News Text */
-    .news-text {
-        padding: 10px;
-        color: white;
-        flex: 1;
-    }
-
     </style>
     <script>
         function openPasswordModal() {
@@ -1055,25 +1001,32 @@
         <div class="news-section fade-in" style="margin: 50px auto; width: 90%; text-align: center; background: #2c2c2c; border-radius: 15px; padding: 30px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
             <h2 style="color: #dedede; margin-bottom: 20px;">Latest News</h2>
             <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-        <!-- Main News (Half Page) -->
-        <div class="main-news">
-            <img src="Picture/WebsiteLaunching.jpg" alt="Main News">
-            <div class="news-content">
-                <h2>Website Launch!</h2>
-                <p>On March 30, 2025, Explorgramming made its grand debut, marking the beginning of an exciting journey!</p>
-            </div>
-        </div>
-    
-        <!-- Side News (Taller & Clickable) -->
-        <div class="side-news-container">
-            <a href="upcomingEvent.html" class="side-news">
-                <img src="Picture/explorgrammingEvent.jpg" alt="Side News 1">
-                <div class="news-text">
-                    <h4>Explorgramming Double Session!</h4>
-                    <p>Learn C with treasure hunt concepts.</p>
+                <!-- Main News -->
+                <div style="flex: 1; background: #1a1a1a; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+                    <img src="Picture/WebsiteLaunching.jpg" alt="Main News" style="width: 100%; height: auto; object-fit: cover;">
+                    <div style="padding: 20px; text-align: left;">
+                        <h3 style="color: #ffffff; margin-bottom: 10px;">Website Launch!</h3>
+                        <p style="color: #cccccc; font-size: 1rem;">On March 30 2025, Explorgramming made its grand debut, marking the beginning of an exciting journey!</p>
+                    </div>
                 </div>
-            </a>
 
+
+                <!-- Side News -->
+
+
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
+                    <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); display: flex;">
+                        <img src="Picture/explorgrammingEvent.jpg" alt="Side News 1" style="width: 40%; height: 100%; object-fit: cover; border-radius: 0;">
+                        <div style="padding: 10px; text-align: left;">
+                            <h4 style="color: #ffffff; margin-bottom: 5px;">Explorgramming Double Session!</h4>
+                            <p style="color: #cccccc; font-size: 0.9rem;">Learn C with treasure hunt concepts.</p>
+                            <button onclick="location.href='upcomingEvent.html'" style="background: #0056b3; color: white; padding: 5px 10px; font-size: 0.8rem; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s;">
+                                Join now
+                            </button>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
         </div>
         <hr style="border: none; border-top: 2px solid #2c2c2c; margin: 0;"> <!-- Adjusted separator below news -->
@@ -1159,7 +1112,7 @@
 
     <!-- Version label -->
     <div class="version-label" onclick="openUpdateModal()">
-        Version 0.12.1
+        <span>Version 0.12.1</span>
     </div>
 
     <!-- Update modal -->
