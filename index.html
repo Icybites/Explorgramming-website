@@ -830,6 +830,185 @@
         .news-section h3, .news-section h4 {
             animation: fadeIn 1.5s ease-in-out; /* Add fade-in animation for titles */
         }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar div {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .navbar img {
+                margin-bottom: 10px;
+            }
+            .main-interface h1 {
+                font-size: 2.5rem;
+            }
+            .main-interface p {
+                font-size: 1rem;
+            }
+            .role-blocks {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .role-block {
+                width: 100%;
+            }
+            .committee-grid {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .news-section > div:first-child {
+                flex: 1 1 100%;
+            }
+            .news-section img {
+                height: auto;
+            }
+            .album-slider {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px;
+            }
+            .main-interface h1 {
+                font-size: 2rem;
+            }
+            .main-interface p {
+                font-size: 0.9rem;
+            }
+            .role-blocks {
+                gap: 15px;
+            }
+            .role-block {
+                padding: 15px;
+            }
+            .committee-member {
+                width: 100%;
+            }
+            .news-section {
+                padding: 20px;
+            }
+            .album-slider {
+                height: 250px;
+            }
+            .album-slider img {
+                object-fit: contain;
+            }
+            footer {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                text-align: center;
+            }
+            .navbar div {
+                align-items: center;
+            }
+            .main-interface h1 {
+                font-size: 1.8rem;
+            }
+            .main-interface p {
+                font-size: 0.8rem;
+            }
+            .role-blocks {
+                gap: 10px;
+            }
+            .role-block {
+                padding: 10px;
+            }
+            .committee-member img {
+                width: 80px;
+                height: 80px;
+            }
+            .news-section h2 {
+                font-size: 1.5rem;
+            }
+            .album-slider {
+                height: 200px;
+            }
+            .album-slider img {
+                object-fit: cover;
+            }
+            footer {
+                padding: 10px;
+            }
+        }
+        .main-news {
+        flex: 1;
+        max-width: 50%; /* Ensures it takes only half the page */
+        background: #1a1a1a;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+        animation: pulse 2s infinite;
+    }
+
+    /* Pulse Effect */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+        100% { transform: scale(1); }
+    }
+
+    /* Main News Image */
+    .main-news img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .news-content {
+        padding: 20px;
+        color: white;
+    }
+
+    /* Side News Container */
+    .side-news-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Side News - Taller Items */
+    .side-news {
+        display: flex;
+        height: 200px; /* Makes them vertically longer */
+        background: #1a1a1a;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        align-items: center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* Hover effect */
+    .side-news:hover {
+        transform: scale(1.05);
+    }
+
+    /* Side News Image */
+    .side-news img {
+        width: 40%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Side News Text */
+    .news-text {
+        padding: 10px;
+        color: white;
+        flex: 1;
+    }
     </style>
     <script>
         function openPasswordModal() {
@@ -965,7 +1144,7 @@
 
     <!-- Main Content -->
     <div id="mainContent" style="display: none;">
-        <header class="fade-in" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('nature4k.jpg') center/cover no-repeat; color: white; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;">
+        <header class="fade-in" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Picture/nature4k.jpg') center/cover no-repeat; color: white; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;">
             <h1 style="font-size: 4rem; margin-bottom: 20px;">Welcome to the Explorgramming</h1>
             <p style="font-size: 1.5rem; max-width: 800px; line-height: 1.8;">Explore the world of programming with interactive challenges and exciting activities.</p>
             <button onclick="location.href='upcomingEvent.html'" style="margin-top: 20px; padding: 12px 25px; font-size: 1rem; background: linear-gradient(45deg, #0056b3, #69b1ff); color: white; border: none; border-radius: 8px; cursor: pointer; overflow: hidden; position: relative; transition: transform 0.3s, box-shadow 0.3s;">
@@ -1002,30 +1181,25 @@
             <h2 style="color: #dedede; margin-bottom: 20px;">Latest News</h2>
             <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
                 <!-- Main News -->
-                <div style="flex: 1; background: #1a1a1a; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
-                    <img src="WebsiteLaunching.jpg" alt="Main News" style="width: 100%; height: auto; object-fit: cover;">
-                    <div style="padding: 20px; text-align: left;">
-                        <h3 style="color: #ffffff; margin-bottom: 10px;">Website Launch!</h3>
-                        <p style="color: #cccccc; font-size: 1rem;">On March 30 2025, Explorgramming made its grand debut, marking the beginning of an exciting journey!</p>
+                <div class="main-news">
+                    <img src="Picture/WebsiteLaunching.jpg" alt="Main News">
+                    <div class="news-content">
+                        <h2>Website Launch!</h2>
+                        <p>On March 30, 2025, Explorgramming made its grand debut, marking the beginning of an exciting journey!</p>
                     </div>
                 </div>
-
-
-                <!-- Side News -->
-
-
-                <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-                    <div style="background: #1a1a1a; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); display: flex;">
-                        <img src="explorgrammingEvent.jpg" alt="Side News 1" style="width: 40%; height: 100%; object-fit: cover; border-radius: 0;">
-                        <div style="padding: 10px; text-align: left;">
-                            <h4 style="color: #ffffff; margin-bottom: 5px;">Explorgramming Double Session!</h4>
-                            <p style="color: #cccccc; font-size: 0.9rem;">Learn C with treasure hunt concepts.</p>
-                            <button onclick="location.href='upcomingEvent.html'" style="background: #0056b3; color: white; padding: 5px 10px; font-size: 0.8rem; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s;">
-                                Join now
-                            </button>
+            
+                <!-- Side News (Taller & Clickable) -->
+                <div class="side-news-container">
+                    <a href="upcomingEvent.html" class="side-news">
+                        <img src="Picture/explorgrammingEvent.jpg" alt="Side News 1">
+                        <div class="news-text">
+                            <h4>Explorgramming Double Session!</h4>
+                            <p>Learn C with treasure hunt concepts.</p>
                         </div>
+                    </a>
+        
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -1037,11 +1211,11 @@
             <h2 style="color: #dedede; margin-bottom: 20px;">Past Explorgramming Events</h2>
             <div class="album-slider" style="position: relative; overflow: hidden; width: 90%; max-width: 1000px; margin: 0 auto; height: 400px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); background: #d3d3d3;">
                 <div class="slides" style="display: flex; transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1); height: 100%;">
-                    <img src="a1.jpg" alt="Picture 1" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
-                    <img src="a2.jpg" alt="Picture 2" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
-                    <img src="a3.jpg" alt="Picture 3" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
-                    <img src="a4.jpg" alt="Picture 4" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
-                    <img src="a5.jpg" alt="Picture 5" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
+                    <img src="Picture/a1.jpg" alt="Picture 1" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
+                    <img src="Picture/a2.jpg" alt="Picture 2" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
+                    <img src="Picture/a3.jpg" alt="Picture 3" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
+                    <img src="Picture/a4.jpg" alt="Picture 4" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
+                    <img src="Picture/a5.jpg" alt="Picture 5" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
                 </div>
                 <button class="prev" onclick="moveSlide(-1)" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease, background 0.3s ease;">&#10094;</button>
                 <button class="next" onclick="moveSlide(1)" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease, background 0.3s ease;">&#10095;</button>
