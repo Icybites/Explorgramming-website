@@ -34,7 +34,7 @@
             transition: transform 0.3s ease-in-out;
         }
         .navbar img:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
         }
         .navbar div {
             display: flex;
@@ -171,7 +171,17 @@
     <script>
         const groups = 8;
         const checkpoints = 8;
-        let checkpointData = JSON.parse(localStorage.getItem("checkpointData")) || {};
+
+        // Prompt user for account identifier with a formal message
+        const accountKey = prompt(
+            "🌟 Welcome to the Mark Entry System! 🌟\n\nTo access your personalized data, please enter your unique account identifier below.\n\n(If you're new, feel free to use 'defaultAccount' to get started!)",
+            "defaultAccount"
+        ) || "defaultAccount";
+
+        // Use account-specific key for localStorage
+        const storageKey = `checkpointData_${accountKey}`;
+        let checkpointData = JSON.parse(localStorage.getItem(storageKey)) || {};
+
         function observeTables() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -227,7 +237,7 @@
                 const wrong = parseInt(document.getElementById(`wrong-${cp}-${g}`).value) || 0;
                 checkpointData[cp][g] = { time, correct, wrong };
             }
-            localStorage.setItem("checkpointData", JSON.stringify(checkpointData));
+            localStorage.setItem(storageKey, JSON.stringify(checkpointData));
             calculateSummary();
         }
 
