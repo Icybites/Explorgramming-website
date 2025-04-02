@@ -38,7 +38,7 @@
             transition: transform 0.3s ease-in-out;
         }
         .navbar img:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
         }
         .navbar div {
             display: flex;
@@ -182,13 +182,22 @@
 
     <script>
         document.querySelector('.navbar').style.display = 'flex'; // Ensure navbar is visible
+        const groups = 8;
+        const checkpoints = 8;
+
+        // Prompt user for account identifier with a formal message
+        const accountKey = prompt(
+            "🏆 Welcome to the Leaderboard! 🏆\n\nTo view your team's performance, please enter your unique account identifier below.\n\n(If you're unsure, use 'defaultAccount' to explore the leaderboard!)",
+            "defaultAccount"
+        ) || "defaultAccount";
+
+        // Use account-specific key for localStorage
+        const storageKey = `checkpointData_${accountKey}`;
+        const checkpointData = JSON.parse(localStorage.getItem(storageKey)) || {};
+
         function loadLeaderboard() {
-            const groups = 8;
-            const checkpoints = 8;
             const leaderboardBody = document.getElementById("leaderboardBody");
             leaderboardBody.innerHTML = "";
-
-            const checkpointData = JSON.parse(localStorage.getItem("checkpointData")) || {};
 
             const scores = [];
             for (let g = 1; g <= groups; g++) {
