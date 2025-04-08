@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no">
     <title>Explorgramming System</title>
     <link rel="icon" type="image/png" href="kuliah2.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -557,6 +557,11 @@
                     sectionImage.onerror = () => {
                         sectionImage.src = "default.jpg";
                     };
+
+                    // Reinitialize carousel if "Main" section is clicked
+                    if (href === "greeting.html") {
+                        initializeCarousel();
+                    }
                 });
             });
 
@@ -567,28 +572,26 @@
 
             // Carousel navigation
             const initializeCarousel = () => {
-    const carousel = document.querySelector('.carousel');
-    carousel.style.width = '100%';
-    carousel.style.maxWidth = '100vw';
-    
-                const carouselTrack = document.querySelector(".carousel-track");
-                const images = document.querySelectorAll(".carousel img");
-                const prevButton = document.querySelector(".prev-btn");
-                const nextButton = document.querySelector(".next-btn");
+                const carousel = document.querySelector('.carousel');
+                const carouselTrack = document.querySelector('.carousel-track');
+                const images = document.querySelectorAll('.carousel img');
+                const prevButton = document.querySelector('.prev-btn');
+                const nextButton = document.querySelector('.next-btn');
                 let currentIndex = 0;
 
                 const updateCarousel = () => {
-                    const offset = -currentIndex * 100;
+                    const offset = -currentIndex * 100; // Move the track by 100% per slide
                     carouselTrack.style.transform = `translateX(${offset}%)`;
+                    carouselTrack.style.transition = 'transform 0.5s ease-in-out'; // Smooth sliding
                 };
 
-                prevButton.addEventListener("click", () => {
-                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                prevButton.addEventListener('click', () => {
+                    currentIndex = (currentIndex - 1 + images.length) % images.length; // Wrap around to the last slide
                     updateCarousel();
                 });
 
-                nextButton.addEventListener("click", () => {
-                    currentIndex = (currentIndex + 1) % images.length;
+                nextButton.addEventListener('click', () => {
+                    currentIndex = (currentIndex + 1) % images.length; // Wrap around to the first slide
                     updateCarousel();
                 });
 
@@ -596,18 +599,18 @@
                 let startX = 0;
                 let isDragging = false;
 
-                carouselTrack.addEventListener("touchstart", (e) => {
+                carouselTrack.addEventListener('touchstart', (e) => {
                     startX = e.touches[0].clientX;
                     isDragging = true;
                 });
 
-                carouselTrack.addEventListener("touchmove", (e) => {
+                carouselTrack.addEventListener('touchmove', (e) => {
                     if (!isDragging) return;
                     const moveX = e.touches[0].clientX - startX;
                     carouselTrack.style.transform = `translateX(calc(${-currentIndex * 100}% + ${moveX}px))`;
                 });
 
-                carouselTrack.addEventListener("touchend", (e) => {
+                carouselTrack.addEventListener('touchend', (e) => {
                     isDragging = false;
                     const endX = e.changedTouches[0].clientX;
                     if (startX - endX > 50) {
@@ -621,32 +624,9 @@
 
             const initializeFullscreen = () => {
                 const carouselImages = document.querySelectorAll(".carousel img");
-                const fullscreenOverlay = document.createElement("div");
-                fullscreenOverlay.classList.add("fullscreen-overlay");
-                fullscreenOverlay.innerHTML = `
-                    <button class="close-fullscreen">&times;</button>
-                    <img src="" alt="Fullscreen Image">
-                `;
-                document.body.appendChild(fullscreenOverlay);
-
-                const fullscreenImage = fullscreenOverlay.querySelector("img");
-                const closeFullscreen = fullscreenOverlay.querySelector(".close-fullscreen");
-
+                // Remove event listeners for fullscreen overlay
                 carouselImages.forEach(img => {
-                    img.addEventListener("click", () => {
-                        fullscreenImage.src = img.src;
-                        fullscreenOverlay.style.display = "flex";
-                    });
-                });
-
-                closeFullscreen.addEventListener("click", () => {
-                    fullscreenOverlay.style.display = "none";
-                });
-
-                fullscreenOverlay.addEventListener("click", (event) => {
-                    if (event.target === fullscreenOverlay) {
-                        fullscreenOverlay.style.display = "none";
-                    }
+                    img.removeEventListener("click", () => {});
                 });
             };
 
