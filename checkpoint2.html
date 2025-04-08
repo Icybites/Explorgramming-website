@@ -98,7 +98,6 @@
     <div class="container">
         <h1>Checkpoint 2</h1>
         <pre id="code">
-
 #include &lt;stdio.h&gt;  // For standard input/output functions
 #include &lt;stdlib.h&gt; // For rand and srand functions
 #include &lt;string.h&gt; // For strcmp function
@@ -106,8 +105,6 @@
 #include &lt;math.h&gt;   // For fmod function
 #include &lt;time.h&gt;   // For time function
 
-#define COLOR_BOLD "\033[1;5m"
-#define COLOR_OFF "\033[0m"
 #define MAX_QUESTIONS 10 
 
 char questions[MAX_QUESTIONS][500] = {
@@ -215,8 +212,6 @@ int main() {
     printf("Password accepted! Let's begin the quiz.\n");
     
     Quiz(10);
-    
-    printf(COLOR_BOLD"\nHint for next checkpoint - Geng Plastik Hitam \n\n"COLOR_OFF);
     
     return 0;
 }
