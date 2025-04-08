@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explorgramming System</title>
-    <link rel="icon" type="image/png" href="kuliah2.png">
+    <link rel="icon" type="image/png" href="Explorgramming/kuliah2.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -37,7 +37,7 @@
             transition: transform 0.3s ease-in-out;
         }
         .navbar img:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
         }
         .navbar div {
             display: flex;
@@ -1030,7 +1030,7 @@
             if (password === "faci123") {
                 // Save password to localStorage
                 localStorage.setItem("facilitatorPassword", password);
-                window.location.href = 'faciAccess.html';
+                window.location.href = 'Explorgramming/faciAccess.html';
             } else {
                 alert("Incorrect password! Access denied.");
             }
@@ -1116,11 +1116,10 @@
 </head>
 <body>
     <nav class="navbar" style="display: none;">
-        <img src="kuliah2.png" alt="Logo" class="logo">
+        <img src="Explorgramming/kuliah2.png" alt="Logo" class="logo">
         <div>
-            <a href="index.html">Home</a>
-            <a href="leaderboard.html">Leaderboard</a>
-            <a href="contact.html">Contact</a>
+            <a href="Explorgramming/index.html">Home</a>
+            <a href="Explorgramming/contact.html">Contact</a>
         </div>
     </nav>
 
@@ -1144,10 +1143,10 @@
 
     <!-- Main Content -->
     <div id="mainContent" style="display: none;">
-        <header class="fade-in" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('nature4k.jpg') center/cover no-repeat; color: white; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;">
+        <header class="fade-in" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Explorgramming/Picture/nature4k.jpg') center/cover no-repeat; color: white; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;">
             <h1 style="font-size: 4rem; margin-bottom: 20px;">Welcome to the Explorgramming</h1>
             <p style="font-size: 1.5rem; max-width: 800px; line-height: 1.8;">Explore the world of programming with interactive challenges and exciting activities.</p>
-            <button onclick="location.href='upcomingEvent.html'" style="margin-top: 20px; padding: 12px 25px; font-size: 1rem; background: linear-gradient(45deg, #0056b3, #69b1ff); color: white; border: none; border-radius: 8px; cursor: pointer; overflow: hidden; position: relative; transition: transform 0.3s, box-shadow 0.3s;">
+            <button onclick="location.href='Explorgramming/upcomingEvent.html'" style="margin-top: 20px; padding: 12px 25px; font-size: 1rem; background: linear-gradient(45deg, #0056b3, #69b1ff); color: white; border: none; border-radius: 8px; cursor: pointer; overflow: hidden; position: relative; transition: transform 0.3s, box-shadow 0.3s;">
                 <span style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.2); transform: skewX(-45deg); transition: left 0.5s ease-in-out;"></span>
                 View Upcoming Events
             </button>
@@ -1165,12 +1164,12 @@
                 <div class="role-block" style="animation: fadeIn 1.5s ease-in-out;">
                     <h2>Participant</h2>
                     <p>Participants engage in programming challenges, compete with others, and enhance their coding skills in a fun environment.</p>
-                    <button class="participant" onclick="location.href='leaderboard.html'">Participant</button>
+                    <button class="participant" onclick="location.href='Explorgramming/participantAccess.html'">Participant</button>
                 </div>
                 <div class="role-block" style="animation: fadeIn 1.5s ease-in-out;">
                     <h2>Student</h2>
                     <p>Students can access question exercises and past year exams to practice and improve their knowledge.</p>
-                    <button class="student" onclick="location.href='studentResources.html'">Student</button>
+                    <button class="student" onclick="location.href='Explorgramming/studentResources.html'">Student</button>
                 </div>
             </div>
         </div>
@@ -1182,7 +1181,7 @@
             <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
                 <!-- Main News -->
                 <div class="main-news">
-                    <img src="WebsiteLaunching.jpg" alt="Main News">
+                    <img src="Explorgramming/Picture/WebsiteLaunching.jpg" alt="Main News">
                     <div class="news-content">
                         <h2>Website Launch!</h2>
                         <p>On March 30, 2025, Explorgramming made its grand debut, marking the beginning of an exciting journey!</p>
@@ -1191,8 +1190,8 @@
             
                 <!-- Side News (Taller & Clickable) -->
                 <div class="side-news-container">
-                    <a href="upcomingEvent.html" class="side-news">
-                        <img src="explorgrammingEvent.jpg" alt="Side News 1">
+                    <a href="Explorgramming/upcomingEvent.html" class="side-news">
+                        <img src="Explorgramming/Picture/explorgrammingEvent.jpg" alt="Side News 1">
                         <div class="news-text">
                             <h4>Explorgramming Double Session!</h4>
                             <p>Learn C with treasure hunt concepts.</p>
@@ -1211,11 +1210,11 @@
             <h2 style="color: #dedede; margin-bottom: 20px;">Past Explorgramming Events</h2>
             <div class="album-slider" style="position: relative; overflow: hidden; width: 90%; max-width: 1000px; margin: 0 auto; height: 400px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); background: #d3d3d3;">
                 <div class="slides" style="display: flex; transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1); height: 100%;">
-                    <img src="a1.jpg" alt="Picture 1" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
-                    <img src="a2.jpg" alt="Picture 2" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
-                    <img src="a3.jpg" alt="Picture 3" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
-                    <img src="a4.jpg" alt="Picture 4" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
-                    <img src="a5.jpg" alt="Picture 5" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
+                    <img src="Explorgramming/Picture/a1.jpg" alt="Picture 1" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
+                    <img src="Explorgramming/Picture/a2.jpg" alt="Picture 2" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
+                    <img src="Explorgramming/Picture/a3.jpg" alt="Picture 3" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
+                    <img src="Explorgramming/Picture/a4.jpg" alt="Picture 4" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
+                    <img src="Explorgramming/Picture/a5.jpg" alt="Picture 5" style="width: 100%; flex-shrink: 0; border-radius: 15px; object-fit: cover; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.5s ease, opacity 0.5s ease;">
                 </div>
                 <button class="prev" onclick="moveSlide(-1)" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease, background 0.3s ease;">&#10094;</button>
                 <button class="next" onclick="moveSlide(1)" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease, background 0.3s ease;">&#10095;</button>
@@ -1233,12 +1232,12 @@
             <!-- Top Row -->
             <div class="committee-grid" style="display: flex; justify-content: center; gap: 40px; margin-bottom: 20px;">
                 <div class="committee-member" style="background: #ffffff; border-radius: 15px; padding: 20px; width: 250px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 0.8s ease-in-out;">
-                    <img src="committee2.jpg" alt="Madam Fadila" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
+                    <img src="Explorgramming/committee2.jpg" alt="Madam Fadila" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
                     <h3 style="color: #003d80; font-size: 1.2rem; margin-bottom: 5px;">Madam Fadila</h3>
                     <p style="color: #555; font-size: 1rem;">Lecturer Advisor</p>
                 </div>
                 <div class="committee-member" style="background: #ffffff; border-radius: 15px; padding: 20px; width: 250px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1s ease-in-out;">
-                    <img src="committee1.jpg" alt="Yusuf Taqyuddin" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
+                    <img src="Explorgramming/committee1.jpg" alt="Yusuf Taqyuddin" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
                     <h3 style="color: #003d80; font-size: 1.2rem; margin-bottom: 5px;">Yusuf Taqyuddin</h3>
                     <p style="color: #555; font-size: 1rem;">Explorgramming Director</p>
                 </div>
@@ -1247,22 +1246,22 @@
             <!-- Bottom Row -->
             <div class="committee-grid" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
                 <div class="committee-member" style="background: #ffffff; border-radius: 15px; padding: 20px; width: 250px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1.2s ease-in-out;">
-                    <img src="committee3.jpg" alt="Nurin Khadeejah" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
+                    <img src="Explorgramming/committee3.jpg" alt="Nurin Khadeejah" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
                     <h3 style="color: #003d80; font-size: 1.2rem; margin-bottom: 5px;">Nurin Khadeejah</h3>
                     <p style="color: #555; font-size: 1rem;">Code Tester Lead</p>
                 </div>
                 <div class="committee-member" style="background: #ffffff; border-radius: 15px; padding: 20px; width: 250px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1.4s ease-in-out;">
-                    <img src="committee4.jpg" alt="Aisyah" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
+                    <img src="Explorgramming/committee4.jpg" alt="Aisyah" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
                     <h3 style="color: #003d80; font-size: 1.2rem; margin-bottom: 5px;">Aisyah</h3>
                     <p style="color: #555; font-size: 1rem;">Documentation Lead</p>
                 </div>
                 <div class="committee-member" style="background: #ffffff; border-radius: 15px; padding: 20px; width: 250px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1.6s ease-in-out;">
-                    <img src="committee4.jpg" alt="Muhammad Zulhilmi" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
+                    <img src="Explorgramming/committee4.jpg" alt="Muhammad Zulhilmi" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
                     <h3 style="color: #003d80; font-size: 1.2rem; margin-bottom: 5px;">Muhammad Zulhilmi</h3>
                     <p style="color: #555; font-size: 1rem;">Quality Assurance Lead</p>
                 </div>
                 <div class="committee-member" style="background: #ffffff; border-radius: 15px; padding: 20px; width: 250px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.3s, box-shadow 0.3s; animation: fadeInUp 1.8s ease-in-out;">
-                    <img src="committee4.jpg" alt="Nabil Najmi" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
+                    <img src="Explorgramming/committee4.jpg" alt="Nabil Najmi" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;">
                     <h3 style="color: #003d80; font-size: 1.2rem; margin-bottom: 5px;">Nabil Najmi</h3>
                     <p style="color: #555; font-size: 1rem;">Participant Coordinator</p>
                 </div>
@@ -1296,6 +1295,8 @@
             <ul>
                 <li>Added all checkpoint code access for facilitator with copy button function.</li>
                 <li>Added News section to keep user updated on what's new.</li>
+                <li>Introduced a new participant roles page, enhancing functionality with multiple new features.</li>
+                <li>Removed "Leaderboard page" for improvement in upcoming update.</li>
             </ul>
 
             <h3>What's New in Version 0.11.1</h3>
