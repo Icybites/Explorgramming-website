@@ -98,7 +98,6 @@
     <div class="container">
         <h1>Checkpoint 1</h1>
         <pre id="code">
-
 #include &lt;stdio.h&gt;  // For standard input/output functions
 #include &lt;stdlib.h&gt; // For rand and srand functions
 #include &lt;string.h&gt; // For strcmp function
@@ -106,14 +105,12 @@
 #include &lt;math.h&gt;   // For fmod function
 #include &lt;time.h&gt;   // For time function
 
-#define COLOR_BOLD "\033[1;5m"
-#define COLOR_OFF "\033[0m"
 #define MAX_QUESTIONS 10 
 
 char questions[MAX_QUESTIONS][500] = {
-    "Define the compile stage process", 
-    "Identify the error that appears after compile and run the code", 
-    "There are three types of programming languages except", 
+    "Define the compile stage process",
+    "Identify the error that appears after compile and run the code",
+    "There are three types of programming languages except",
     "The code program is referred to as_______",
     "What is the purpose of a compiler in programming?",
     "Which of the following is NOT a step in the compilation process?",
@@ -124,9 +121,9 @@ char questions[MAX_QUESTIONS][500] = {
 };
 
 char choices[MAX_QUESTIONS][4][500] = {
-    {"A. The object code is linked with code for functions in other files\nB. The C program in translated into machine language code\nC. The program is executed one instruction at a time\nD. The program is placed in memory"}, 
-    {"A. Syntax\nB. Logical\nC. Run-time\nD. Compile"}, 
-    {"A. Machine Language\nB. Assembly\nC. Robot Language\nD. High-Level language"}, 
+    {"A. The object code is linked with code for functions in other files\nB. The C program in translated into machine language code\nC. The program is executed one instruction at a time\nD. The program is placed in memory"},
+    {"A. Syntax\nB. Logical\nC. Run-time\nD. Compile"},
+    {"A. Machine Language\nB. Assembly\nC. Robot Language\nD. High-Level language"},
     {"A. Compiler Code\nB. Pseudocode\nC. Source Code\nD. Basic Code"},
     {"A. To execute code line by line\nB. To translate high-level code into machine code\nC. To debug runtime errors\nD. To manage memory allocation"},
     {"A. Preprocessing\nB. Linking\nC. Interpretation\nD. Assembly"},
@@ -215,8 +212,6 @@ int main() {
     printf("Password accepted! Let's begin the quiz.\n");
     
     Quiz(10);
-    
-    printf(COLOR_BOLD"\nHint for next checkpoint - 2 4 4 3 4, tahun 90-an \n\n"COLOR_OFF);
     
     return 0;
 }
