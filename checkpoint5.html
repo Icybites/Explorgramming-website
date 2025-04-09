@@ -1,201 +1,310 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <math.h>
-#include <time.h>
-
-#define MAX_MCQ 8
-#define MAX_FILL_IN 2
-#define TOTAL_QUESTIONS (MAX_MCQ + MAX_FILL_IN)
-
-int caseInsensitiveCompare(const char *str1, const char *str2) {
-    while (*str1 && *str2) {
-        if (tolower((unsigned char)*str1) != tolower((unsigned char)*str2)) {
-            return 0;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkpoint 5</title>
+    <title>Checkpoint 5</title>
+    <link rel="icon" type="image/png" href="kuliah2.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
         }
-        str1++;
-        str2++;
-    }
-    return (*str1 == '\0' && *str2 == '\0');
-}
-
-void clearInputBuffer() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
-char mcqQuestions[MAX_MCQ][500] = {
-    "Describe the process when a called function completes its task.",
-    "What is the result of the function sqrt(16) in C? Assuming proper inclusion of the math library.",
-    "What is the difference between function arguments and parameters?",
-    "The function scanf( ) returns ________.",
-    "What does the return statement do in a C function?",
-    "What is the proper function prototype for: double mySqrt(int x );",
-    "What is the primary purpose of using functions in C?",
-    "What does a function prototype in C include?"
-};
-
-char mcqChoices[MAX_MCQ][4][3000] = {
-    {"A. Terminates program execution normally\nB. Aborts program execution\nC. Logs its result\nD. Returns to the calling function"},
-    {"A. 4\nB. 8\nC. 2\nD. Error"},
-    {"A. Function parameters declaration are the function before its actual definition.\n  Whereas, function arguments are any statements after return statement will not execute\nB. Function parameters are any statements after return statement will not execute.\n   Whereas, function arguments are the function before its actual definition.\nC. Function parameters are the values declared in a function declaration.\n   Whereas, function arguments are the values that are passed in the function during the function call.\nD. Function parameters are the values that are passed in the function during the function call.\n   Whereas, function arguments are the values declared in a function declaration."},
-    {"A. The actual values read for each argument\nB. 1\nC. The number of successful read input values\nD. ASCII value of the input read"},
-    {"A. Ends the program\nB. Returns a value from the function\nC. Prints output\nD. Declares a variable"},
-    {"A. Defines a function called mySqrt which takes an integer argument and returns a double\nB. Defines a function called double which calculates square roots\nC. Defines a function called mySqrt which takes an argument of type x and returns and double"},
-    {"A. To declare variables\nB. To organize code into manageable units\nC. To print output\nD. To define constants"},
-    {"A. Function body\nB. Function name\nC. Function parameters\nD. All of the above"}
-};
-
-char mcqAnswers[MAX_MCQ][100] = {
-    "D", "A", "C", "C", "B", "A", "B", "D"
-};
-
-char fillInQuestions[MAX_FILL_IN][500] = {
-    "A function that does not return any value should have its return type declared as ______.",
-    "The function ________ is not needed if the user-defined function is defined before the main() function."
-};
-
-char fillInAnswers[MAX_FILL_IN][100] = {
-    "void",
-    "prototype"
-};
-
-void runMCQ(int *correct, int *wrong, time_t startTime) {
-    char input[100];
-    const int timeLimit = 10 * 60;
-
-    printf("\nStarting the multiple-choice quiz!\n");
-
-    for (int i = 0; i < MAX_MCQ; i++) {
-        int attempts = 0, isCorrect = 0;
-
-        while (attempts < 2 && !isCorrect) {
-            time_t currentTime;
-            time(&currentTime);
-            if (difftime(currentTime, startTime) >= timeLimit) {
-                printf("\033[1;31mTime's up! Quiz terminated.\033[0m\n");
-                return;
+        .container {
+            width: 60%;
+            margin: 100px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-
-            printf("\n\033[1;37mQuestion %d: %s\033[0m\n", i + 1, mcqQuestions[i]);
-            printf("=====================================================================\n");
-
-            for (int j = 0; j < 4; j++) {
-                if (strlen(mcqChoices[i][j]) > 0) {
-                    printf("%s\n", mcqChoices[i][j]);
-                }
-            }
-
-            printf("Your answer: ");
-            scanf_s(" %99s", input, (unsigned)_countof(input));
-            clearInputBuffer();
-
-            if (caseInsensitiveCompare(input, mcqAnswers[i])) {
-                printf("\033[1;32mCorrect! You may proceed.\033[0m\n");
-                (*correct)++;
-                isCorrect = 1;
-            } else {
-                attempts++;
-                if (attempts < 2) {
-                    printf("\033[1;31mWrong answer. Try again! (%d/2 attempts remaining)\033[0m\n", 2 - attempts);
-                } else {
-                    printf("\033[1;31mWrong answer. Moving to the next question.\033[0m\n");
-                    printf("\033[1;33mThe correct answer was: %s\033[0m\n", mcqAnswers[i]);
-                    (*wrong)++;
-                }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-    }
-}
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .copy-button {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background: #007BFF;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px auto;
+            width: auto;
+            text-align: center;
+            transition: background 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .copy-button:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+        }
+        .copy-notice {
+            display: none;
+            color: green;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .floating-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            z-index: 1000;
+        }
+    </style>
+    <script>
+        function copyCode() {
+            const code = document.getElementById("code").textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const message = document.getElementById("floating-message");
+                message.style.display = "block";
+                setTimeout(() => {
+                    message.style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Checkpoint 5</h1>
+        <pre id="code">
+#include &lt;stdio.h&gt;  // For standard input/output functions
+#include &lt;stdlib.h&gt; // For rand and srand functions
+#include &lt;string.h&gt; // For strcmp function
+#include &lt;ctype.h&gt;  // For toupper function
+#include &lt;math.h&gt;   // For fmod function
+#include &lt;time.h&gt;   // For time function
 
-void runFillInTheBlank(int *correct, int *wrong, time_t startTime) {
-    char input[100];
-    const int timeLimit = 10 * 60;
-
-    printf("\nStarting the fill-in-the-blank quiz!\n");
-
-    for (int i = 0; i < MAX_FILL_IN; i++) {
-        int attempts = 0, isCorrect = 0;
-
-        while (attempts < 3 && !isCorrect) {
-            time_t currentTime;
-            time(&currentTime);
-            if (difftime(currentTime, startTime) >= timeLimit) {
-                printf("\033[1;31mTime's up! Quiz terminated.\033[0m\n");
-                return;
+    #define MAX_MCQ 8
+    #define MAX_FILL_IN 2
+    #define TOTAL_QUESTIONS (MAX_MCQ + MAX_FILL_IN)
+    
+    int caseInsensitiveCompare(const char *str1, const char *str2) {
+        while (*str1 && *str2) {
+            if (tolower((unsigned char)*str1) != tolower((unsigned char)*str2)) {
+                return 0;
             }
-
-            printf("\n\033[1;37mQuestion %d: %s\033[0m\n", MAX_MCQ + i + 1, fillInQuestions[i]);
-            printf("=====================================================================\n");
-
-            printf("Your answer: ");
-
-            if (fgets(input, sizeof(input), stdin)) {
-                input[strcspn(input, "\n")] = '\0';  
-
-                if (strlen(input) == 0) {
-                    attempts++;
-                    printf("\033[1;31mPlease enter an answer! (%d/3 attempts remaining)\033[0m\n", 3 - attempts);
-                    continue;
+            str1++;
+            str2++;
+        }
+        return (*str1 == '\0' && *str2 == '\0');
+    }
+    
+    void clearInputBuffer() {
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
+    }
+    
+    char mcqQuestions[MAX_MCQ][500] = {
+        "Describe the process when a called function completes its task.",
+        "What is the result of the function sqrt(16) in C? Assuming proper inclusion of the math library.",
+        "What is the difference between function arguments and parameters?",
+        "The function scanf( ) returns ________.",
+        "What does the return statement do in a C function?",
+        "What is the proper function prototype for: double mySqrt(int x );",
+        "What is the primary purpose of using functions in C?",
+        "What does a function prototype in C include?"
+    };
+    
+    char mcqChoices[MAX_MCQ][4][3000] = {
+        {"A. Terminates program execution normally\nB. Aborts program execution\nC. Logs its result\nD. Returns to the calling function"},
+        {"A. 4\nB. 8\nC. 2\nD. Error"},
+        {"A. Function parameters declaration are the function before its actual definition.\n  Whereas, function arguments are any statements after return statement will not execute\nB. Function parameters are any statements after return statement will not execute.\n   Whereas, function arguments are the function before its actual definition.\nC. Function parameters are the values declared in a function declaration.\n   Whereas, function arguments are the values that are passed in the function during the function call.\nD. Function parameters are the values that are passed in the function during the function call.\n   Whereas, function arguments are the values declared in a function declaration."},
+        {"A. The actual values read for each argument\nB. 1\nC. The number of successful read input values\nD. ASCII value of the input read"},
+        {"A. Ends the program\nB. Returns a value from the function\nC. Prints output\nD. Declares a variable"},
+        {"A. Defines a function called mySqrt which takes an integer argument and returns a double\nB. Defines a function called double which calculates square roots\nC. Defines a function called mySqrt which takes an argument of type x and returns and double"},
+        {"A. To declare variables\nB. To organize code into manageable units\nC. To print output\nD. To define constants"},
+        {"A. Function body\nB. Function name\nC. Function parameters\nD. All of the above"}
+    };
+    
+    char mcqAnswers[MAX_MCQ][100] = {
+        "D", "A", "C", "C", "B", "A", "B", "D"
+    };
+    
+    char fillInQuestions[MAX_FILL_IN][500] = {
+        "A function that does not return any value should have its return type declared as ______.",
+        "The function ________ is not needed if the user-defined function is defined before the main() function."
+    };
+    
+    char fillInAnswers[MAX_FILL_IN][100] = {
+        "void",
+        "prototype"
+    };
+    
+    void runMCQ(int *correct, int *wrong, time_t startTime) {
+        char input[100];
+        const int timeLimit = 10 * 60;
+    
+        printf("\nStarting the multiple-choice quiz!\n");
+    
+        for (int i = 0; i < MAX_MCQ; i++) {
+            int attempts = 0, isCorrect = 0;
+    
+            while (attempts < 2 && !isCorrect) {
+                time_t currentTime;
+                time(&amp;currentTime);
+                if (difftime(currentTime, startTime) >= timeLimit) {
+                    printf("\033[1;31mTime's up! Quiz terminated.\033[0m\n");
+                    return;
                 }
-
-                if (caseInsensitiveCompare(input, fillInAnswers[i])) {
+    
+                printf("\n\033[1;37mQuestion %d: %s\033[0m\n", i + 1, mcqQuestions[i]);
+                printf("=====================================================================\n");
+    
+                for (int j = 0; j < 4; j++) {
+                    if (strlen(mcqChoices[i][j]) > 0) {
+                        printf("%s\n", mcqChoices[i][j]);
+                    }
+                }
+    
+                printf("Your answer: ");
+                scanf_s(" %99s", input, (unsigned)_countof(input));
+                clearInputBuffer();
+    
+                if (caseInsensitiveCompare(input, mcqAnswers[i])) {
                     printf("\033[1;32mCorrect! You may proceed.\033[0m\n");
                     (*correct)++;
                     isCorrect = 1;
                 } else {
                     attempts++;
-                    if (attempts < 3) {
-                        printf("\033[1;31mWrong answer. Try again! (%d/3 attempts remaining)\033[0m\n", 3 - attempts);
+                    if (attempts < 2) {
+                        printf("\033[1;31mWrong answer. Try again! (%d/2 attempts remaining)\033[0m\n", 2 - attempts);
                     } else {
                         printf("\033[1;31mWrong answer. Moving to the next question.\033[0m\n");
-                        printf("\033[1;33mThe correct answer was: %s\033[0m\n", fillInAnswers[i]);
+                        printf("\033[1;33mThe correct answer was: %s\033[0m\n", mcqAnswers[i]);
                         (*wrong)++;
                     }
                 }
-            } else {
-                printf("\033[1;31mError reading input. Please try again.\033[0m\n");
-                clearerr(stdin);
-                clearInputBuffer();
-                attempts++;
             }
         }
     }
-}
-
-int main() {
-    char password[20];
-    const char correctPassword[] = "powpowpay";
-    int totalCorrect = 0, totalWrong = 0;
-    time_t startTime, endTime;
-
-    do {
-        printf("Enter the checkpoint password: ");
-        scanf_s("%19s", password, (unsigned)_countof(password));
-        clearInputBuffer();
-
-        if (strcmp(password, correctPassword) != 0) {
-            printf("Invalid password! Try again.\n");
+    
+    void runFillInTheBlank(int *correct, int *wrong, time_t startTime) {
+        char input[100];
+        const int timeLimit = 10 * 60;
+    
+        printf("\nStarting the fill-in-the-blank quiz!\n");
+    
+        for (int i = 0; i < MAX_FILL_IN; i++) {
+            int attempts = 0, isCorrect = 0;
+    
+            while (attempts < 3 && !isCorrect) {
+                time_t currentTime;
+                time(&amp;currentTime);
+                if (difftime(currentTime, startTime) >= timeLimit) {
+                    printf("\033[1;31mTime's up! Quiz terminated.\033[0m\n");
+                    return;
+                }
+    
+                printf("\n\033[1;37mQuestion %d: %s\033[0m\n", MAX_MCQ + i + 1, fillInQuestions[i]);
+                printf("=====================================================================\n");
+    
+                printf("Your answer: ");
+    
+                if (fgets(input, sizeof(input), stdin)) {
+                    input[strcspn(input, "\n")] = '\0';  
+    
+                    if (strlen(input) == 0) {
+                        attempts++;
+                        printf("\033[1;31mPlease enter an answer! (%d/3 attempts remaining)\033[0m\n", 3 - attempts);
+                        continue;
+                    }
+    
+                    if (caseInsensitiveCompare(input, fillInAnswers[i])) {
+                        printf("\033[1;32mCorrect! You may proceed.\033[0m\n");
+                        (*correct)++;
+                        isCorrect = 1;
+                    } else {
+                        attempts++;
+                        if (attempts < 3) {
+                            printf("\033[1;31mWrong answer. Try again! (%d/3 attempts remaining)\033[0m\n", 3 - attempts);
+                        } else {
+                            printf("\033[1;31mWrong answer. Moving to the next question.\033[0m\n");
+                            printf("\033[1;33mThe correct answer was: %s\033[0m\n", fillInAnswers[i]);
+                            (*wrong)++;
+                        }
+                    }
+                } else {
+                    printf("\033[1;31mError reading input. Please try again.\033[0m\n");
+                    clearerr(stdin);
+                    clearInputBuffer();
+                    attempts++;
+                }
+            }
         }
-    } while (strcmp(password, correctPassword) != 0);
-
-    printf("\nPassword accepted! Let's begin the quiz.\n");
-    time(&startTime);
-
-    runMCQ(&totalCorrect, &totalWrong, startTime);
-    runFillInTheBlank(&totalCorrect, &totalWrong, startTime);
-
-    time(&endTime);
-    double timeTaken = difftime(endTime, startTime);
-    int minutes = (int)(timeTaken / 60);
-    double seconds = fmod(timeTaken, 60);
-
-    printf("\n\033[1;36mQuiz Summary for All %d Questions\033[0m\n", TOTAL_QUESTIONS);
-    printf("\033[1;33mTotal Time Taken: %d minutes %.2f seconds\n\033[0m", minutes, seconds);
-    printf("\033[1;37mTotal Correct Answers:\033[1;32m %d\n\033[0m", totalCorrect);
-    printf("\033[1;37mTotal Wrong Answers:\033[1;31m %d\n\033[0m", totalWrong);
-    printf("\033[1;37mCongratulations on completing the quiz!\n\033[0m");
-
-    return 0;
-}
+    }
+    
+    int main() {
+        char password[20];
+        const char correctPassword[] = "powpowpay";
+        int totalCorrect = 0, totalWrong = 0;
+        time_t startTime, endTime;
+    
+        do {
+            printf("Enter the checkpoint password: ");
+            scanf_s("%19s", password, (unsigned)_countof(password));
+            clearInputBuffer();
+    
+            if (strcmp(password, correctPassword) != 0) {
+                printf("Invalid password! Try again.\n");
+            }
+        } while (strcmp(password, correctPassword) != 0);
+    
+        printf("\nPassword accepted! Let's begin the quiz.\n");
+        time(&amp;startTime);
+    
+        runMCQ(&amp;totalCorrect, &totalWrong, startTime);
+        runFillInTheBlank(&totalCorrect, &totalWrong, startTime);
+    
+        time(&amp;endTime);
+        double timeTaken = difftime(endTime, startTime);
+        int minutes = (int)(timeTaken / 60);
+        double seconds = fmod(timeTaken, 60);
+    
+        printf("\n\033[1;36mQuiz Summary for All %d Questions\033[0m\n", TOTAL_QUESTIONS);
+        printf("\033[1;33mTotal Time Taken: %d minutes %.2f seconds\n\033[0m", minutes, seconds);
+        printf("\033[1;37mTotal Correct Answers:\033[1;32m %d\n\033[0m", totalCorrect);
+        printf("\033[1;37mTotal Wrong Answers:\033[1;31m %d\n\033[0m", totalWrong);
+        printf("\033[1;37mCongratulations on completing the quiz!\n\033[0m");
+    
+        return 0;
+    }
+    
+        </pre>
+        <div id="floating-message" class="floating-message">Code copied to clipboard!</div>
+        <button class="copy-button" onclick="copyCode()">Copy Code</button>
+        <p id="copy-notice" class="copy-notice">Code copied to clipboard!</p>
+        <button class="copy-button" onclick="window.location.href='faciAccess.html'">Go Back</button>
+    </div>
+</body>
+</html>
